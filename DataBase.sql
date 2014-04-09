@@ -6,8 +6,8 @@ GRANT SELECT, DELETE, INSERT, UPDATE ON appGym.* TO 'sec_user'@'localhost';
 
 CREATE TABLE appGym.member (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(30) NOT NULL,
-    email VARCHAR(50) NOT NULL,
+    username VARCHAR(30) NOT NULL UNIQUE,
+    email VARCHAR(50) NOT NULL UNIQUEss,
     password CHAR(128) NOT NULL,
     salt CHAR(128) NOT NULL 
 ) ENGINE = InnoDB;
@@ -25,18 +25,15 @@ create table appGym.ejercicio(
 )engine = InnoDB;
 
 create table appGym.rutina (
+	numRutina int not null auto_increment primary key,
 	idAlumno int not null,
-	numRutina int not null,
 	dia0 date not null,
 	pesoInicial double not null,
-	pesoFinal double not null,
-	primary key (idAlumno, numRutina)
+	pesoFinal double not null
 )engine=InnoDB;
 
 
 create table appGym.rutina_ejercicio(
-	INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	idAlumno int not null,
 	numRutina int not null,
 	idEjercicio int not null,
 	dia int not null,
@@ -44,17 +41,19 @@ create table appGym.rutina_ejercicio(
 	series int not null,
 	repeticiones int not null,
 	avance int not null,
-	primary key(idAlumno, numRutina, idEjercicio, dia), -- what??? 4 se necesitan para ser unico
+	primary key(numRutina, idEjercicio, dia), -- what??? 4 se necesitan para ser unico
 	foreign key(idEjercicio) references ejercicio(idEjercicio),
 	foreign key(idAlumno, numRutina) references rutina(idAlumno, numRutina)
 )engine = InnoDB;
 
 create table appGym.alumno(
 	idAlumno int not null primary key,
+	rutinaActual int,
 	edad int not null,
 	peso double not null,
 	sexo varchar(2) not null,
-	foreign key idAlumno references member(id)
+	foreign key (idAlumno) references member(id),
+	foreign key(rutinaActual) references rutina(idRutina)
 )engine = InnoDB;
 
 create table appGym.Instructor(

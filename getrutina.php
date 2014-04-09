@@ -12,7 +12,7 @@ if(mysqli_connect_errno()) {
 }
 
 $result = $mysqli->query(
-	""
+	"select * from rutina r inner join rutina_ejercicio re on r.numRutina = re.numRutina where username = " . $usuario
 ) or die($mysqli->error.__LINE__);
 
 ?>
