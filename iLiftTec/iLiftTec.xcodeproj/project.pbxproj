@@ -1,0 +1,494 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C408C1D918E4C49A00C79C99 /* ILTMusculoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C408C1D818E4C49A00C79C99 /* ILTMusculoTableViewCell.m */; };
+		C4292E0E18E4C99A0048B63E /* checkbox-checked.png in Resources */ = {isa = PBXBuildFile; fileRef = C4292E0C18E4C99A0048B63E /* checkbox-checked.png */; };
+		C4292E0F18E4C99A0048B63E /* checkbox-unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = C4292E0D18E4C99A0048B63E /* checkbox-unchecked.png */; };
+		C479A4F718DFC71400E049C9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C479A4F618DFC71400E049C9 /* Foundation.framework */; };
+		C479A4F918DFC71400E049C9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C479A4F818DFC71400E049C9 /* CoreGraphics.framework */; };
+		C479A4FB18DFC71400E049C9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C479A4FA18DFC71400E049C9 /* UIKit.framework */; };
+		C479A50118DFC71400E049C9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C479A4FF18DFC71400E049C9 /* InfoPlist.strings */; };
+		C479A50318DFC71400E049C9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C479A50218DFC71400E049C9 /* main.m */; };
+		C479A50718DFC71400E049C9 /* ILTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C479A50618DFC71400E049C9 /* ILTAppDelegate.m */; };
+		C479A50A18DFC71400E049C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C479A50818DFC71400E049C9 /* Main.storyboard */; };
+		C479A50D18DFC71400E049C9 /* ILTMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C479A50C18DFC71400E049C9 /* ILTMasterViewController.m */; };
+		C479A51018DFC71400E049C9 /* ILTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C479A50F18DFC71400E049C9 /* ILTDetailViewController.m */; };
+		C479A51218DFC71400E049C9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C479A51118DFC71400E049C9 /* Images.xcassets */; };
+		C479A51918DFC71400E049C9 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C479A51818DFC71400E049C9 /* XCTest.framework */; };
+		C479A51A18DFC71400E049C9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C479A4F618DFC71400E049C9 /* Foundation.framework */; };
+		C479A51B18DFC71400E049C9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C479A4FA18DFC71400E049C9 /* UIKit.framework */; };
+		C479A52318DFC71400E049C9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C479A52118DFC71400E049C9 /* InfoPlist.strings */; };
+		C479A52518DFC71400E049C9 /* iLiftTecTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C479A52418DFC71400E049C9 /* iLiftTecTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C479A51C18DFC71400E049C9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C479A4EB18DFC71400E049C9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C479A4F218DFC71400E049C9;
+			remoteInfo = iLiftTec;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C408C1D718E4C49A00C79C99 /* ILTMusculoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILTMusculoTableViewCell.h; sourceTree = "<group>"; };
+		C408C1D818E4C49A00C79C99 /* ILTMusculoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILTMusculoTableViewCell.m; sourceTree = "<group>"; };
+		C4292E0C18E4C99A0048B63E /* checkbox-checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkbox-checked.png"; sourceTree = "<group>"; };
+		C4292E0D18E4C99A0048B63E /* checkbox-unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkbox-unchecked.png"; sourceTree = "<group>"; };
+		C479A4F318DFC71400E049C9 /* iLiftTec.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iLiftTec.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C479A4F618DFC71400E049C9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C479A4F818DFC71400E049C9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C479A4FA18DFC71400E049C9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C479A4FE18DFC71400E049C9 /* iLiftTec-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iLiftTec-Info.plist"; sourceTree = "<group>"; };
+		C479A50018DFC71400E049C9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C479A50218DFC71400E049C9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C479A50418DFC71400E049C9 /* iLiftTec-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iLiftTec-Prefix.pch"; sourceTree = "<group>"; };
+		C479A50518DFC71400E049C9 /* ILTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ILTAppDelegate.h; sourceTree = "<group>"; };
+		C479A50618DFC71400E049C9 /* ILTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ILTAppDelegate.m; sourceTree = "<group>"; };
+		C479A50918DFC71400E049C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C479A50B18DFC71400E049C9 /* ILTMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ILTMasterViewController.h; sourceTree = "<group>"; };
+		C479A50C18DFC71400E049C9 /* ILTMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ILTMasterViewController.m; sourceTree = "<group>"; };
+		C479A50E18DFC71400E049C9 /* ILTDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ILTDetailViewController.h; sourceTree = "<group>"; };
+		C479A50F18DFC71400E049C9 /* ILTDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ILTDetailViewController.m; sourceTree = "<group>"; };
+		C479A51118DFC71400E049C9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C479A51718DFC71400E049C9 /* iLiftTecTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iLiftTecTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C479A51818DFC71400E049C9 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		C479A52018DFC71400E049C9 /* iLiftTecTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iLiftTecTests-Info.plist"; sourceTree = "<group>"; };
+		C479A52218DFC71400E049C9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C479A52418DFC71400E049C9 /* iLiftTecTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iLiftTecTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C479A4F018DFC71400E049C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C479A4F918DFC71400E049C9 /* CoreGraphics.framework in Frameworks */,
+				C479A4FB18DFC71400E049C9 /* UIKit.framework in Frameworks */,
+				C479A4F718DFC71400E049C9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C479A51418DFC71400E049C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C479A51918DFC71400E049C9 /* XCTest.framework in Frameworks */,
+				C479A51B18DFC71400E049C9 /* UIKit.framework in Frameworks */,
+				C479A51A18DFC71400E049C9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C479A4EA18DFC71400E049C9 = {
+			isa = PBXGroup;
+			children = (
+				C479A4FC18DFC71400E049C9 /* iLiftTec */,
+				C479A51E18DFC71400E049C9 /* iLiftTecTests */,
+				C479A4F518DFC71400E049C9 /* Frameworks */,
+				C479A4F418DFC71400E049C9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C479A4F418DFC71400E049C9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C479A4F318DFC71400E049C9 /* iLiftTec.app */,
+				C479A51718DFC71400E049C9 /* iLiftTecTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C479A4F518DFC71400E049C9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C479A4F618DFC71400E049C9 /* Foundation.framework */,
+				C479A4F818DFC71400E049C9 /* CoreGraphics.framework */,
+				C479A4FA18DFC71400E049C9 /* UIKit.framework */,
+				C479A51818DFC71400E049C9 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C479A4FC18DFC71400E049C9 /* iLiftTec */ = {
+			isa = PBXGroup;
+			children = (
+				C479A50518DFC71400E049C9 /* ILTAppDelegate.h */,
+				C479A50618DFC71400E049C9 /* ILTAppDelegate.m */,
+				C479A50818DFC71400E049C9 /* Main.storyboard */,
+				C4292E0C18E4C99A0048B63E /* checkbox-checked.png */,
+				C4292E0D18E4C99A0048B63E /* checkbox-unchecked.png */,
+				C408C1D718E4C49A00C79C99 /* ILTMusculoTableViewCell.h */,
+				C408C1D818E4C49A00C79C99 /* ILTMusculoTableViewCell.m */,
+				C479A50B18DFC71400E049C9 /* ILTMasterViewController.h */,
+				C479A50C18DFC71400E049C9 /* ILTMasterViewController.m */,
+				C479A50E18DFC71400E049C9 /* ILTDetailViewController.h */,
+				C479A50F18DFC71400E049C9 /* ILTDetailViewController.m */,
+				C479A51118DFC71400E049C9 /* Images.xcassets */,
+				C479A4FD18DFC71400E049C9 /* Supporting Files */,
+			);
+			path = iLiftTec;
+			sourceTree = "<group>";
+		};
+		C479A4FD18DFC71400E049C9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C479A4FE18DFC71400E049C9 /* iLiftTec-Info.plist */,
+				C479A4FF18DFC71400E049C9 /* InfoPlist.strings */,
+				C479A50218DFC71400E049C9 /* main.m */,
+				C479A50418DFC71400E049C9 /* iLiftTec-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C479A51E18DFC71400E049C9 /* iLiftTecTests */ = {
+			isa = PBXGroup;
+			children = (
+				C479A52418DFC71400E049C9 /* iLiftTecTests.m */,
+				C479A51F18DFC71400E049C9 /* Supporting Files */,
+			);
+			path = iLiftTecTests;
+			sourceTree = "<group>";
+		};
+		C479A51F18DFC71400E049C9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C479A52018DFC71400E049C9 /* iLiftTecTests-Info.plist */,
+				C479A52118DFC71400E049C9 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C479A4F218DFC71400E049C9 /* iLiftTec */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C479A52818DFC71400E049C9 /* Build configuration list for PBXNativeTarget "iLiftTec" */;
+			buildPhases = (
+				C479A4EF18DFC71400E049C9 /* Sources */,
+				C479A4F018DFC71400E049C9 /* Frameworks */,
+				C479A4F118DFC71400E049C9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iLiftTec;
+			productName = iLiftTec;
+			productReference = C479A4F318DFC71400E049C9 /* iLiftTec.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C479A51618DFC71400E049C9 /* iLiftTecTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C479A52B18DFC71400E049C9 /* Build configuration list for PBXNativeTarget "iLiftTecTests" */;
+			buildPhases = (
+				C479A51318DFC71400E049C9 /* Sources */,
+				C479A51418DFC71400E049C9 /* Frameworks */,
+				C479A51518DFC71400E049C9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C479A51D18DFC71400E049C9 /* PBXTargetDependency */,
+			);
+			name = iLiftTecTests;
+			productName = iLiftTecTests;
+			productReference = C479A51718DFC71400E049C9 /* iLiftTecTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C479A4EB18DFC71400E049C9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = ILT;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Ivan Diaz";
+				TargetAttributes = {
+					C479A51618DFC71400E049C9 = {
+						TestTargetID = C479A4F218DFC71400E049C9;
+					};
+				};
+			};
+			buildConfigurationList = C479A4EE18DFC71400E049C9 /* Build configuration list for PBXProject "iLiftTec" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C479A4EA18DFC71400E049C9;
+			productRefGroup = C479A4F418DFC71400E049C9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C479A4F218DFC71400E049C9 /* iLiftTec */,
+				C479A51618DFC71400E049C9 /* iLiftTecTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C479A4F118DFC71400E049C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C479A51218DFC71400E049C9 /* Images.xcassets in Resources */,
+				C479A50118DFC71400E049C9 /* InfoPlist.strings in Resources */,
+				C4292E0E18E4C99A0048B63E /* checkbox-checked.png in Resources */,
+				C479A50A18DFC71400E049C9 /* Main.storyboard in Resources */,
+				C4292E0F18E4C99A0048B63E /* checkbox-unchecked.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C479A51518DFC71400E049C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C479A52318DFC71400E049C9 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C479A4EF18DFC71400E049C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C479A50D18DFC71400E049C9 /* ILTMasterViewController.m in Sources */,
+				C408C1D918E4C49A00C79C99 /* ILTMusculoTableViewCell.m in Sources */,
+				C479A50718DFC71400E049C9 /* ILTAppDelegate.m in Sources */,
+				C479A50318DFC71400E049C9 /* main.m in Sources */,
+				C479A51018DFC71400E049C9 /* ILTDetailViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C479A51318DFC71400E049C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C479A52518DFC71400E049C9 /* iLiftTecTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C479A51D18DFC71400E049C9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C479A4F218DFC71400E049C9 /* iLiftTec */;
+			targetProxy = C479A51C18DFC71400E049C9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C479A4FF18DFC71400E049C9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C479A50018DFC71400E049C9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C479A50818DFC71400E049C9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C479A50918DFC71400E049C9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		C479A52118DFC71400E049C9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C479A52218DFC71400E049C9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C479A52618DFC71400E049C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C479A52718DFC71400E049C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C479A52918DFC71400E049C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iLiftTec/iLiftTec-Prefix.pch";
+				INFOPLIST_FILE = "iLiftTec/iLiftTec-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C479A52A18DFC71400E049C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iLiftTec/iLiftTec-Prefix.pch";
+				INFOPLIST_FILE = "iLiftTec/iLiftTec-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C479A52C18DFC71400E049C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iLiftTec.app/iLiftTec";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iLiftTec/iLiftTec-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "iLiftTecTests/iLiftTecTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		C479A52D18DFC71400E049C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iLiftTec.app/iLiftTec";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iLiftTec/iLiftTec-Prefix.pch";
+				INFOPLIST_FILE = "iLiftTecTests/iLiftTecTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C479A4EE18DFC71400E049C9 /* Build configuration list for PBXProject "iLiftTec" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C479A52618DFC71400E049C9 /* Debug */,
+				C479A52718DFC71400E049C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C479A52818DFC71400E049C9 /* Build configuration list for PBXNativeTarget "iLiftTec" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C479A52918DFC71400E049C9 /* Debug */,
+				C479A52A18DFC71400E049C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C479A52B18DFC71400E049C9 /* Build configuration list for PBXNativeTarget "iLiftTecTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C479A52C18DFC71400E049C9 /* Debug */,
+				C479A52D18DFC71400E049C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C479A4EB18DFC71400E049C9 /* Project object */;
+}
