@@ -41,9 +41,11 @@ create table appGym.rutina_ejercicio(
 	series int not null,
 	repeticiones int not null,
 	avance int not null,
-	primary key(numRutina, idEjercicio, dia), -- what??? 4 se necesitan para ser unico
+	comentario varchar(150),
+	
+	primary key(numRutina, idEjercicio, dia), 
 	foreign key(idEjercicio) references ejercicio(idEjercicio),
-	foreign key(idAlumno, numRutina) references rutina(idAlumno, numRutina)
+	foreign key(numRutina) references rutina(numRutina)
 )engine = InnoDB;
 
 create table appGym.alumno(
@@ -56,7 +58,7 @@ create table appGym.alumno(
 	foreign key(rutinaActual) references rutina(idRutina)
 )engine = InnoDB;
 
-create table appGym.Instructor(
+create table appGym.instructor(
 	idInstructor int not null primary key,
 	tipo varchar(10),
 	foreign key idInstructor references member(id)
