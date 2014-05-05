@@ -1,6 +1,8 @@
 <?php
 include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
+
+include_once 'includes/db.php';
  
 sec_session_start();
 ?>
@@ -13,13 +15,10 @@ sec_session_start();
     </head>
     <body>
         <?php if (login_check($mysqli) == true) : ?>
-            <p>Welcome <?php echo htmlentities($_SESSION['username']); ?>!  <?php echo htmlentities($_SESSION['user_id']); ?></p>
-            <p>
-                This is an example protected page.  To access this page, users
-                must be logged in.  At some stage, we'll also check the role of
-                the user, so pages will be able to determine the type of user
-                authorised to access the page.
-            </p>
+            <p>Welcome <?php echo htmlentities($_SESSION['username']); ?>!</p>
+            <?php
+				$rutinas
+            ?>
             <p>Return to <a href="index.php">login page</a></p>
         <?php else : ?>
             <p>

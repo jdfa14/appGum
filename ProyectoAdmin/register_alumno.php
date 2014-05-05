@@ -1,7 +1,4 @@
-
-
 <?php
-
 include_once 'includes/register.inc.php';
 include_once 'includes/functions.php';
 ?>
@@ -39,18 +36,29 @@ include_once 'includes/functions.php';
         <form action="<?php echo esc_url($_SERVER['PHP_SELF']); ?>" 
                 method="post" 
                 name="registration_form">
-                
-            <input type="hidden" name="tipo" value="i">
+            <input type="hidden" name="tipo" value="a">
             Username: <input type='text' 
                 name='username' 
-                id='username' /><br>
-            Email: <input type="text" name="email" id="email" /><br>
+                id='username' /><br />
+            Nacimiento: <input type='date' 
+                name='nacimiento' 
+                id='nacimiento' /><br />
+            Peso: <input type='number' 
+                name='peso' 
+                id='peso' /><br />
+            Sexo: <select 
+                name='sexo' 
+                id='sexo' >
+					<option value="m">Masculino</option>
+					<option value="f">Femenino</option>
+                </select><br />
+            Email: <input type="text" name="email" id="email" /><br />
             Password: <input type="password"
                              name="password" 
-                             id="password"/><br>
+                             id="password"/><br />
             Confirm password: <input type="password" 
                                      name="confirmpwd" 
-                                     id="confirmpwd" /><br>
+                                     id="confirmpwd" /><br />
             <input type="button" 
                    value="Register" 
                    onclick="return regformhash(this.form,

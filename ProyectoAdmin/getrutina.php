@@ -1,11 +1,18 @@
 <?php
+include_once 'includes/db_connect.php';
+include_once 'includes/functions.php';
+ 
+sec_session_start();
+?>
+
+<?php if (login_check($mysqli) == true) {
+
+
 
 
 
 $username = $_SESSION['username'];
-$user_id = $_SESSION['username'];
-
-$conexion = new mysqli('localhost', 'appGym', 'ivdida', 'appGym');
+$user_id = $_SESSION['user_id'];
 
 if(mysqli_connect_errno()) {
 	printf("Connect failed: %s\n", mysqli_connect_error());
@@ -14,7 +21,7 @@ if(mysqli_connect_errno()) {
 
 $result = $mysqli->query(
 	"select  *, a.idAlumno as alumnoId, r.numRutina as rutinaId, " .
-	"    e.idEjercicio as ejercicioId, e.nombre as ejercicioNombre" .
+	"    e.idEjercicio as ejercicioId, e.nombre as ejercicioNombre " .
 	"from alumno a " .
 	"inner join rutina r on a.rutinaActual = r.numRutina " .
 	"inner join rutina_ejercicio re on r.numRutina = re.numRutina " .
@@ -49,10 +56,13 @@ while($row = mysqli_fetch_assoc($result)) {
 $output = array(
 	"ejercicios" => $ejercicios,
 	"pesoInicial" => $peso_inicial,
-	"pesoFinal" => $peso_final
+	"pesoFinal" => $peso_final,
+	"status" => "ok"
 );
 
 echo json_encode($output);
-mysqli_close($conexion);
+mysqli_close($mysqli);
 
-?>
+} else { ?>
+            {"status": "error"}
+<?php } ?>

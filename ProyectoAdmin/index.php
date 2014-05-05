@@ -20,6 +20,8 @@ if (login_check($mysqli) == true) {
     </head>
     <body>
         <?php
+        
+        echo phpversion();
         if (isset($_GET['error'])) {
             echo '<p class="error">Error Logging In!</p>';
         }

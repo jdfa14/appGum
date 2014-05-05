@@ -1,9 +1,55 @@
+<?php
+include_once 'includes/db_connect.php';
+include_once 'includes/functions.php';
+
+// NO SE QUE ESTOY HACIENDO !!
+ 
+sec_session_start();
+
+login_check($mysqli) or die("No has iniciado sesion");
+
+
+
+
+$nombre = $_SESSION['username'];
+$correo = $_SESSION['correo'];
+$sexo = $_SESSION['sexo'];
+
+$conexion = new mysqli(
+	'localhost', 'usuario', 'paydelimon', 'appGym');
+
+if(mysqli_connect_errno()) {
+	printf("Connect failed: %s\n", mysqli_connect_error());
+	exit();
+}
+
+$mysqli->query(
+	"select  *, a.idAlumno as alumnoId, r.numRutina as rutinaId, " .
+	"    e.idEjercicio as ejercicioId, e.nombre as ejercicioNombre " .
+	"from alumno a " .
+	"inner join rutina r on a.rutinaActual = r.numRutina " .
+	"inner join rutina_ejercicio re on r.numRutina = re.numRutina " .
+	"inner join ejercicio e on re.idEjercicio = e.idEjercicio " .
+	"where a.idAlumno = " . $user_id
+) or die($mysqli->error.__LINE__);
+
+create table alumno(
+	idAlumno int not null primary key,
+	
+	instructor int,
+	rutinaActual int,
+	nacimiento date,
+	peso double,
+	sexo enum('f', 'm') not null,
+	foreign key (idAlumno) references member(id),
+	foreign key (instructor) references instructor(idInstructor)
+)engine = InnoDB;
+
+ ?>
 
 
 <?php
-
 include_once 'includes/register.inc.php';
-include_once 'includes/functions.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,8 +85,6 @@ include_once 'includes/functions.php';
         <form action="<?php echo esc_url($_SERVER['PHP_SELF']); ?>" 
                 method="post" 
                 name="registration_form">
-                
-            <input type="hidden" name="tipo" value="i">
             Username: <input type='text' 
                 name='username' 
                 id='username' /><br>

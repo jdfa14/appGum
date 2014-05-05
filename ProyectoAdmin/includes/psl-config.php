@@ -3,9 +3,9 @@
  * These are the database login details
  */  
 define("HOST", "localhost");     // The host you want to connect to.
-define("USER", "sec_user");    // The database username. 
-define("PASSWORD", "conejo2");    // The database password. 
-define("DATABASE", "secure_login");    // The database name.
+define("USER", "usuario");    // The database username. 
+define("PASSWORD", "paydelimon");    // The database password. 
+define("DATABASE", "appGym");    // The database name.
  
 define("CAN_REGISTER", "any");
 define("DEFAULT_ROLE", "member");
