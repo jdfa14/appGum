@@ -9,15 +9,17 @@
         <title>Lista alumnos</title>
         <script type="text/javascript">
             function modificar(obj){
-                window.location.href="index.php?matricula="+matricula;
+                var matricula = obj.getElementsByTagName("td")[0].innerHTML;
+                window.location.href="rutina_actual.php?alumno="+matricula;
             }
         </script>
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
+        
         <div class="cuerpo" align="center">
-            <h3>Bienvenido </h3>
-            <h3>Alumnos </h3>
+                <h1>Bienvenido <?= $_SESSION['usuario']?></h1>
+                <h1>Alumnos </h1>
             <table id="alumnos">
                 <tr>
                     <th>Matricula</th>

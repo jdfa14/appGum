@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Iniciar sesion</title>
-        <link rel="stylesheet" href="styles/main.css" />
+        <title>Iniciar sesion</title>\
+        <link href="css/main.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div class="formaEntrada">
