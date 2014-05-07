@@ -88,7 +88,6 @@ function despliega_rutina(destino, datos, avance) {
 		
 		
 		var ejercicios = document.createElement("table");
-		ejercicios.id = idtabla + "_" + i;
 		dia_cell.appendChild(ejercicios);
 		
 		for(var j = 0; j < datos.dias[i].length; j++) {
@@ -105,13 +104,15 @@ function despliega_rutina(destino, datos, avance) {
 				"R: " + datos.dias[i][j].repeticiones
 			);
 			
-			row = ejercicios.insertRow(-1);
-			$(row.insertCell(-1)).append(
-				"C: " + avance.dias[i][j].comentario
-			);
-			$(row.insertCell(-1)).append(
-				"T: " + avance.dias[i][j].completado
-			);
+			if(avance) {
+				row = ejercicios.insertRow(-1);
+				$(row.insertCell(-1)).append(
+					"C: " + avance.dias[i][j].comentario
+				);
+				$(row.insertCell(-1)).append(
+					"T: " + avance.dias[i][j].completado
+				);
+			}
 		}
 	}
 }
@@ -134,7 +135,7 @@ function ejecutar() {
 	input.type = "hidden";
 	input.name = "definicion";
 	input.id = "definicion";
-	input.value = $("#nueva_rutina").serializeJSON()
+	input.value = $("#nueva_rutina").serializeJSON();
 
 	alert(input.value);
 	

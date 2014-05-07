@@ -41,7 +41,7 @@ create table alumno(
 
 create table rutina_json (
 	numRutina int not null auto_increment primary key,
-	alumno int not null,
+	alumno varchar(10),
 	dia0 date,
 	pesoInicial double,
 	pesoFinal double,
@@ -62,6 +62,8 @@ create table rutina (
 
 alter table alumno add
 foreign key(rutinaJsonActual) references rutina_json(numRutina);
+alter table rutina_json add
+foreign key(alumno) references alumno(matricula);
 	
 -- select 'ejercicio';
 

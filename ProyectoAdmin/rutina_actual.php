@@ -15,15 +15,15 @@ if(isset($_POST['definicion'])) {
 	
 $definicion = $_POST['definicion'];
 $result = $conexion->query(
-	"insert into rutina(alumno, definicion) " .
-	"values (" . $alumno . ", '" . $definicion . "') " 
+	"insert into rutina_json(alumno, definicion) " .
+	"values ('" . $alumno . "', '" . $definicion . "') " 
 ) or die($conexion->error.__LINE__);
 
 $rutinaActual = $conexion->insert_id;
 
 $result = $conexion->query(
 	"update alumno set rutinaJsonActual = " . $rutinaActual .
-	" where idAlumno = " . $alumno 
+	" where matricula = '" . $alumno . "'" 
 ) or die($conexion->error.__LINE__);
 
 }
@@ -50,7 +50,6 @@ $result = $conexion->query(
     <body>
         <?php 
         
-			echo $_POST['definicion'];
 			$result = $conexion->query(
 				"select  * " .
 				"from alumno " .
@@ -73,7 +72,6 @@ $result = $conexion->query(
 				$definicion = $row['definicion'];
 				$avance = $row['avance'];
 				
-				$i++;
 			}
 			?>
             
@@ -87,12 +85,12 @@ $result = $conexion->query(
 				<button onclick="ejecutar()">Ejecutar</button>
 			
 			<?php
-				if($avance == '' || $definicion == '') {
+				if($definicion == '') {
 					
 				} else {
 			?>
 			<script>
-				despliega_rutina("contenido", <?=$definicion?>, <?=$avance?>);
+				despliega_rutina("contenido", <?=$definicion?>, <?= ($avance ? $avance : "null") ?>);
             </script>
             <?php } ?>
             
