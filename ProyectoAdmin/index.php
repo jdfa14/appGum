@@ -1,40 +1,17 @@
-<?php
-include_once 'includes/db_connect.php';
-include_once 'includes/functions.php';
- 
-sec_session_start();
- 
-if (login_check($mysqli) == true) {
-    $logged = 'in';
-} else {
-    $logged = 'out';
-}
-?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Secure Login: Log In</title>
-        <link rel="stylesheet" href="styles/main.css" />
-        <script type="text/JavaScript" src="js/sha512.js"></script> 
-        <script type="text/JavaScript" src="js/forms.js"></script> 
+        <title>Iniciar sesion</title>\
+        <link href="css/main.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <?php
-        if (isset($_GET['error'])) {
-            echo '<p class="error">Error Logging In!</p>';
-        }
-        ?> 
-        <form action="includes/process_login.php" method="post" name="login_form">                      
-            Email: <input type="text" name="email" />
-            Password: <input type="password" 
-                             name="password" 
-                             id="password"/>
-            <input type="button" 
-                   value="Login" 
-                   onclick="formhash(this.form, this.form.password);" /> 
-        </form>
-        <p>If you don't have a login, please <a href="register.php">register</a></p>
-        <p>If you are done, please <a href="includes/logout.php">log out</a>.</p>
-        <p>You are currently logged <?php echo $logged ?>.</p>
+        <div class="formaEntrada">
+            <form action="includes/iniciarSesion.php" method="post">                      
+                <div class="campoEntrada"> Usuario: <input class="textoEntrada" type="text" name="usuario" id="usuario" required="" /></div>
+                <div class="campoEntrada"> Contrase&ntilde;a: <input class="textoEntrada" type="password" name="contrasena" id="contrasena" required=""/> </div>
+                <div class="campoEntrada"> <input class="botonSumbmit" type="submit" value="Iniciar sesion"/> </div>
+            </form>
+            <a href="register.php">Register</a>
+        </div>
     </body>
 </html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>nueva rutina</title>
+        <script type="text/JavaScript" src="jquery-1.11.1.min.js"></script> 
+        <script type="text/JavaScript" src="jquery.serialize-object.min.js"></script> 
+        <script type="text/JavaScript" src="rutinas.js"></script> 
+    </head>
+    <body>
+		<form name="forma" id="nuevarutina"><table id="nueva" border="1"></table></form>
+		<textarea id="jsonn"></textarea>
+		<table id="res" border="1"></table>
+		<script>
+			var json;
+			function alertform() {
+				//console.log($('form#nuevarutina').serializeJSON());
+				json = $('form#nuevarutina').serializeJSON();
+				$("#jsonn").val(json);
+				despliega_rutina("res", $('form#nuevarutina').serializeObject());
+			}
+			forma_rutina("nueva");
+			
+		</script>
+		
+		<button onclick="alertform()">ya</button>
+    </body>
+</html>
+

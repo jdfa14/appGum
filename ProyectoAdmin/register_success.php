@@ -2,11 +2,13 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Secure Login: Registration Success</title>
-        <link rel="stylesheet" href="styles/main.css" />
+        <title>Sesion iniciada</title>
+        <link rel="stylesheet" href="css/main.css" />
     </head>
     <body>
-        <h1>Registration successful!</h1>
-        <p>You can now go back to the <a href="index.php">login page</a> and log in</p>
+        <div class="cuerpo">
+            <h1>Registration successful!</h1>
+            <p>Ahora puedes regresar a <a href="index.php">login page</a> para iniciar sesion</p>
+        </div>
     </body>
 </html>
