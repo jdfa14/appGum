@@ -35,7 +35,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     [self fetchReports];
     /*UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
      self.navigationItem.rightBarButtonItem = addButton;*/
@@ -138,14 +137,7 @@
      
      ];*/
     
-    _avance = [[NSMutableArray alloc] init];
-    for(NSArray *dia in _definicion) {
-        NSMutableArray *avanceDia = [[NSMutableArray alloc] init];
-        for(NSDictionary *ejercicio in dia) {
-            [avanceDia addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:@NO, @"completado", @"", @"comentarios", nil]];
-        }
-        [_avance addObject:avanceDia];
-    }
+    
     
     
     //[[NSMutableArray alloc] init];
@@ -189,14 +181,33 @@
 - (void)fetchReports
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSData* data = [NSData dataWithContentsOfURL:
-                        [NSURL URLWithString: @"http://10.12.19.33/get_rutina.php"]];
+        
+        NSUserDefaults *fetchDefaults = [NSUserDefaults standardUserDefaults];
+        NSString *user = [fetchDefaults objectForKey:@"kUser"];
+        
+        NSLog(@"user %@", user);
+
+        NSData* data =
+        [NSData dataWithContentsOfURL:
+         [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost/get_rutina.php?matricula=%@", user]
+          ]];
         
         NSError* error;
         NSDictionary *dict =
         [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers | NSJSONReadingAllowFragments error:&error];
+        NSLog(@"%@", dict);
         _definicion = dict[@"dias"];
         NSLog(@"%@", _definicion);
+        
+        _avance = [[NSMutableArray alloc] init];
+        for(NSArray *dia in _definicion) {
+            NSMutableArray *avanceDia = [[NSMutableArray alloc] init];
+            for(NSDictionary *ejercicio in dia) {
+                [avanceDia addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:@NO, @"completado", @"", @"comentarios", nil]];
+            }
+            [_avance addObject:avanceDia];
+        }
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });

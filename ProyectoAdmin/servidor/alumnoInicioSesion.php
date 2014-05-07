@@ -9,10 +9,10 @@
     
     
     if(iniciarSesionAlumno($conexion, $matricula, $contrasena)){
-		$_SESSION['matricula'] = $matricula;
-		
+        $_SESSION['matricula'] = $matricula;
+        
         echo '{"success":1}';
     }else{
-        echo '{"success":0,"error_message":"Username and/or password is invalid."}';
+        echo '{"success":0,"error_message":"Username and/or password is invalid. "}';
     }
 

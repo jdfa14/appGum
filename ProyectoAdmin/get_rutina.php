@@ -7,9 +7,9 @@ include_once 'includes/funciones.php';
 
 
 //login_check($mysqli) or die;
-isset($_SESSION['matricula']) or die('{"status" :  "error"}');
+isset($_GET['matricula']) or die('{"status" :  "error"}');
 
-$alumno = $_SESSION['matricula'];
+$alumno = $_GET['matricula'];
 
 
 ?>

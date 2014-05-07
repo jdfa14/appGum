@@ -108,7 +108,7 @@
             NSLog(@"PostData: %@",post);
             
             
-            NSURL *url=[NSURL URLWithString:@"http://localhost/alumnoInicioSesion.php"];
+            NSURL *url=[NSURL URLWithString:@"http://localhost/servidor/alumnoInicioSesion.php"];
             
             NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
             
