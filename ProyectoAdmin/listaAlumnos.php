@@ -14,7 +14,9 @@
             <h3>Alumnos </h3>
             <table id="alumnos">
                 <tr>
+                    <th>Matricula</th>
                     <th>Nombre</th>
+                    <th>Apellido</th>
                 </tr>
             </table>
             <form action="agregarUsuario.php">
