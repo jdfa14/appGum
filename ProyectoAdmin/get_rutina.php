@@ -1,40 +1,37 @@
 <?php
-include_once 'includes/db_connect.php';
-include_once 'includes/functions.php';
- 
-sec_session_start();
+
+session_start();
+
+include_once 'includes/basededatos.php';
+include_once 'includes/funciones.php';
+
+
+//login_check($mysqli) or die;
+isset($_SESSION['matricula']) or die('{"status" :  "error"}');
+
+$alumno = $_SESSION['matricula'];
+
+
 ?>
 
-<?php if (login_check($mysqli) == true) {
-
-
-
-
-
-$username = $_SESSION['username'];
-$alumno = $_SESSION['user_id'];
+<?php
 
 if(mysqli_connect_errno()) {
 	printf("Connect failed: %s\n", mysqli_connect_error());
 	exit();
 }
 
-$result = $mysqli->query(
+$result = $conexion->query(
 	"select  * " .
-	"alumno " .
+	"from alumno " .
 	"inner join rutina_json on rutinaJsonActual = numRutina " .
-	"where a.idAlumno = " . $alumno
-) or die($mysqli->error.__LINE__);
-
-$definicion
+	"where matricula = '" . $alumno . "'"
+) or die($conexion->error.__LINE__);
 
 if($row = mysqli_fetch_assoc($result)) {
 	$definicion = $row['definicion'];
+	echo $definicion;
 }
 
-echo $definicion;
-mysqli_close($conexion);
 
-} else { ?>
-            {"status": "error"}
-<?php } ?>
+?>

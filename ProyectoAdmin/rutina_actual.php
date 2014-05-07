@@ -41,13 +41,14 @@ $result = $conexion->query(
         <script type="text/JavaScript" src="jquery-1.11.1.min.js"></script> 
         <script type="text/JavaScript" src="jquery.serialize-object.min.js"></script> 
         <script type="text/JavaScript" src="rutinas.js"></script> 
-        <link rel="stylesheet" href="styles/main.css" />
+        <link rel="stylesheet" href="css/main.css" />
         
         <script>
         var alumno = "<?=$alumno?>";
         </script>
     </head>
     <body>
+		<div class="formaEntrada">
         <?php 
         
 			$result = $conexion->query(
@@ -95,6 +96,6 @@ $result = $conexion->query(
             <?php } ?>
             
             <p>Return to <a href="index.php">login page</a></p>
-        
+        </div>
     </body>
 </html>

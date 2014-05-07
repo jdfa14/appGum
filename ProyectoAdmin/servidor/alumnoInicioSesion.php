@@ -2,12 +2,17 @@
     include_once '../includes/basededatos.php';
     include_once '../includes/funciones.php';
     
-    $matricula = $_GET['nombre'];
-    $contrasena = $_GET['contrasena'];
+    session_start();
+    
+    $matricula = $_POST['nombre'];
+    $contrasena = $_POST['contrasena'];
+    
     
     if(iniciarSesionAlumno($conexion, $matricula, $contrasena)){
-        echo json_encode(array('result' => 1));
+		$_SESSION['matricula'] = $matricula;
+		
+        echo '{"success":1}';
     }else{
-        echo json_encode(array('result' => 0));
+        echo '{"success":0,"error_message":"Username and/or password is invalid."}';
     }
 

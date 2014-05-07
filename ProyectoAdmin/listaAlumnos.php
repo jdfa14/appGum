@@ -31,7 +31,7 @@
                     while($renglon = mysqli_fetch_assoc($resultado)){
                 ?>
                 <tr onclick="modificar(this)">
-                    <td><?= $renglon['matricula'] ?></td>
+                    <td><?=$renglon['matricula']?></td>
                     <td><?= $renglon['nombre'] ?></td>
                     <td><?= $renglon['apellido'] ?></td>
                 </tr>
