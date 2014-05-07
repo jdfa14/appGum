@@ -3,11 +3,10 @@ include_once 'db_connect.php';
 include_once 'psl-config.php';
  
 $error_msg = "";
- /**/
-if (isset($_POST['username'], $_POST['email'], $_POST['p'], $_POST['tipo'])) {
+ 
+if (isset($_POST['username'], $_POST['email'], $_POST['p'])) {
     // Sanitize and validate the data passed in
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
-    $tipo = filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_STRING);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $email = filter_var($email, FILTER_VALIDATE_EMAIL);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -27,7 +26,7 @@ if (isset($_POST['username'], $_POST['email'], $_POST['p'], $_POST['tipo'])) {
     // breaking these rules.
     //
  
-    $prep_stmt = "SELECT id FROM member WHERE email = ? LIMIT 1";
+    $prep_stmt = "SELECT id FROM members WHERE email = ? LIMIT 1";
     $stmt = $mysqli->prepare($prep_stmt);
  
     if ($stmt) {
@@ -56,39 +55,13 @@ if (isset($_POST['username'], $_POST['email'], $_POST['p'], $_POST['tipo'])) {
         $password = hash('sha512', $password . $random_salt);
  
         // Insert the new user into the database 
-        if ($insert_stmt = $mysqli->prepare("INSERT INTO member (username, email, password, salt, tipo) VALUES (?, ?, ?, ?, ?)")) {
-            $insert_stmt->bind_param('sssss', $username, $email, $password, $random_salt, $tipo);
+        if ($insert_stmt = $mysqli->prepare("INSERT INTO members (username, email, password, salt) VALUES (?, ?, ?, ?)")) {
+            $insert_stmt->bind_param('ssss', $username, $email, $password, $random_salt);
             // Execute the prepared query.
             if (! $insert_stmt->execute()) {
                 header('Location: ../error.php?err=Registration failure: INSERT');
             }
-            
-            $newid = $mysqli->insert_id;
-            
-            if($tipo == 'a') {
-				$peso = $_POST['peso'];
-				$sexo = $_POST['sexo'];
-				
-				if ($insert_stmt = $mysqli->prepare("INSERT INTO alumno (idAlumno, peso, sexo) VALUES (?, ?, ?)")) {
-					$insert_stmt->bind_param('ids', $newid, $peso, $sexo);
-					// Execute the prepared query.
-					if (! $insert_stmt->execute()) {
-						header('Location: ../error.php?err=Registration failure: INSERT');
-					}
-				}
-            } else if($tipo == 'i') { 
-				if ($insert_stmt = $mysqli->prepare("INSERT INTO alumno (idInstructor) VALUES (?)")) {
-					$insert_stmt->bind_param('i', $newid);
-					// Execute the prepared query.
-					if (! $insert_stmt->execute()) {
-						header('Location: ../error.php?err=Registration failure: INSERT');
-					}
-				}
-			}
-        }  
-        
+        }
         header('Location: ./register_success.php');
     }
-}/**/
-
-?>
+}

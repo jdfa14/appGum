@@ -27,7 +27,7 @@ function sec_session_start() {
 function login($email, $password, $mysqli) {
     // Using prepared statements means that SQL injection is not possible. 
     if ($stmt = $mysqli->prepare("SELECT id, username, password, salt 
-        FROM member
+        FROM members
        WHERE email = ?
         LIMIT 1")) {
         $stmt->bind_param('s', $email);  // Bind "$email" to parameter.
@@ -108,51 +108,7 @@ function checkbrute($user_id, $mysqli) {
 }
 
 function login_check($mysqli) {
-    // Check if all session variables are set 
-    if (isset($_SESSION['user_id'], 
-                        $_SESSION['username'], 
-                        $_SESSION['login_string'])) {
- 
-        $user_id = $_SESSION['user_id'];
-        $login_string = $_SESSION['login_string'];
-        $username = $_SESSION['username'];
- 
-        // Get the user-agent string of the user.
-        $user_browser = $_SERVER['HTTP_USER_AGENT'];
- 
-        if ($stmt = $mysqli->prepare("SELECT password 
-                                      FROM member 
-                                      WHERE id = ? LIMIT 1")) {
-            // Bind "$user_id" to parameter. 
-            $stmt->bind_param('i', $user_id);
-            $stmt->execute();   // Execute the prepared query.
-            $stmt->store_result();
- 
-            if ($stmt->num_rows == 1) {
-                // If the user exists get variables from result.
-                $stmt->bind_result($password);
-                $stmt->fetch();
-                $login_check = hash('sha512', $password . $user_browser);
- 
-                if ($login_check == $login_string) {
-                    // Logged In!!!! 
-                    return true;
-                } else {
-                    // Not logged in 
-                    return false;
-                }
-            } else {
-                // Not logged in 
-                return false;
-            }
-        } else {
-            // Not logged in 
-            return false;
-        }
-    } else {
-        // Not logged in 
-        return false;
-    }
+    return true;
 }
 
 function esc_url($url) {
@@ -184,4 +140,13 @@ function esc_url($url) {
     } else {
         return $url;
     }
+}
+//Api db
+function get_students($instructor_id){
+    $studentsArray = null;//sql request
+    return $studentsArray;
+}
+
+function get_Instructor($instructor_id){
+    $instructor = null;//sqlrequest
 }

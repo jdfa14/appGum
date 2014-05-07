@@ -8,47 +8,36 @@ CREATE USER 'usuario'@'localhost' IDENTIFIED BY 'paydelimon';
 GRANT SELECT, DELETE, INSERT, UPDATE 
 	ON appGym.* TO 'usuario'@'localhost';
 
-select 'member';	
 
 CREATE TABLE member (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(30) NOT NULL UNIQUE,
     email VARCHAR(50) NOT NULL UNIQUE,
     password CHAR(128) NOT NULL,
-    salt CHAR(128) NOT NULL,
-    tipo ENUM('a', 'i') not null
+    PRIMARY KEY (username)
 );
 
-select 'login_attempts';
 
 CREATE TABLE login_attempts (
     user_id INT(11) NOT NULL,
     time VARCHAR(30) NOT NULL
 );
 
-select 'instructor';
-
-create table instructor(
-	idInstructor int not null primary key,
-	foreign key (idInstructor) references member(id)
-);
-
-select 'alumno';
 
 create table alumno(
-	idAlumno int not null primary key,
-	
-	instructor int,
-	rutinaActual int,
+	matricula varchar(10) NOT NULL,
+	instructor varchar(30),
+	nombre varchar(45) NOT NULL,
+	apellido varchar(45) NOT NULL,
+	correo varchar(25) DEFAULT NULL,
+	peso decimal(10,0) DEFAULT NULL,
+	nacimiento date NOT NULL,
 	rutinaJsonActual int,
-	nacimiento date,
-	peso double,
-	sexo enum('f', 'm') not null,
-	foreign key (instructor) references instructor(idInstructor)
+	sexo varchar(10) NOT NULL,
+	contrasena varchar(45) NOT NULL,
+	foreign key (instructor) references member(username),
+	PRIMARY KEY (matricula)
 );
 
-
-select 'rutinajs';
 
 create table rutina_json (
 	numRutina int not null auto_increment primary key,
@@ -61,8 +50,6 @@ create table rutina_json (
 	avance text
 );
 
-select 'rutina';
-
 create table rutina (
 	numRutina int not null auto_increment primary key,
 	idAlumno int not null,
@@ -72,9 +59,6 @@ create table rutina (
 );
 
 -- select 'addfk';
-
-alter table alumno add
-foreign key(rutinaActual) references rutina(numRutina);
 
 alter table alumno add
 foreign key(rutinaJsonActual) references rutina_json(numRutina);
