@@ -1,9 +1,17 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -13,7 +21,7 @@ and open the template in the editor.
     <body>
         <div class="cuerpo">
             <h1>Agregar Usuario</h1>
-            <p>Nombre del Instructor</p>
+            <p>Nombre del Instructor <?php echo $_SESSION['usuario']?></p>
             <div class="formaEntrada">
                 <form action="includes/insertaUsuario.php" method="post">  
                     <div class="campoEntrada" id="divMat">Matricula: <input class="textoEntrada" type="text" name="matricula" id="matricula" placeholder="A01234567" onblur="validMatricula(this)" required=""/> </div>
