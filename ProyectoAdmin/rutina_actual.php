@@ -1,28 +1,30 @@
 <?php
-include_once 'includes/db_connect.php';
-include_once 'includes/functions.php';
- 
-sec_session_start();
 
-login_check($mysqli) or die;
-isset($_POST['idAlumno'] or die;
+session_start();
 
-$alumno = $_POST['idAlumno'];
+include_once 'includes/basededatos.php';
+include_once 'includes/funciones.php';
+
+
+//login_check($mysqli) or die;
+isset($_GET['alumno']) or die("No se especifico alumno");
+
+$alumno = $_GET['alumno'];
 
 if(isset($_POST['definicion'])) {
 	
 $definicion = $_POST['definicion'];
-$result = $mysqli->query(
+$result = $conexion->query(
 	"insert into rutina(alumno, definicion) " .
 	"values (" . $alumno . ", '" . $definicion . "') " 
-) or die($mysqli->error.__LINE__);
+) or die($conexion->error.__LINE__);
 
-$rutinaActual = $mysqli->insert_id;
+$rutinaActual = $conexion->insert_id;
 
-$result = $mysqli->query(
+$result = $conexion->query(
 	"update alumno set rutinaJsonActual = " . $rutinaActual .
 	" where idAlumno = " . $alumno 
-) or die($mysqli->error.__LINE__);
+) or die($conexion->error.__LINE__);
 
 }
 
@@ -40,16 +42,21 @@ $result = $mysqli->query(
         <script type="text/JavaScript" src="jquery.serialize-object.min.js"></script> 
         <script type="text/JavaScript" src="rutinas.js"></script> 
         <link rel="stylesheet" href="styles/main.css" />
+        
+        <script>
+        var alumno = "<?=$alumno?>";
+        </script>
     </head>
     <body>
-        <?php if (login_check($mysqli) == true) { 
-			$result = $mysqli->query(
+        <?php 
+        
+			echo $_POST['definicion'];
+			$result = $conexion->query(
 				"select  * " .
 				"from alumno " .
 				"inner join rutina_json on rutinaJsonActual = numRutina " .
-				"inner join member on idAlumno = id " .
-				"where a.idAlumno = " . $alumno
-			) or die($mysqli->error.__LINE__);
+				"where matricula = '" . $alumno ."'"
+			) or die($conexion->error.__LINE__);
 			
 			$sexo = '';
 			$peso_inicial = '';
@@ -69,7 +76,6 @@ $result = $mysqli->query(
 				$i++;
 			}
 			?>
-            <p>Welcome <?php echo htmlentities($_SESSION['username']); ?>!</p>
             
             
             <div id="contenido"></div>
@@ -78,15 +84,19 @@ $result = $mysqli->query(
             <script>
 				forma_rutina("contenido", "nueva_rutina");
 			</script>
-				<button onclick="ejecutar()"></button>
+				<button onclick="ejecutar()">Ejecutar</button>
+			
+			<?php
+				if($avance == '' || $definicion == '') {
+					
+				} else {
+			?>
 			<script>
 				despliega_rutina("contenido", <?=$definicion?>, <?=$avance?>);
             </script>
+            <?php } ?>
+            
             <p>Return to <a href="index.php">login page</a></p>
-        <?php } else { ?>
-            <p>
-                <span class="error">You are not authorized to access this page.</span> Please <a href="index.php">login</a>.
-            </p>
-        <?php }?>
+        
     </body>
 </html>

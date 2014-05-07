@@ -38,7 +38,6 @@ function forma_rutina(destino, idforma) {
 		boton.innerHTML = "Agregar ejercicio";
 		boton.setAttribute("type", "button");
 		var ejercicios = document.createElement("table");
-		ejercicios.id = idtabla + "_" + i;
 		dia_cell.appendChild(ejercicios);
 		
 		var add_ejercicio_cell = ejercicios.insertRow(0).insertCell(0);
@@ -54,10 +53,10 @@ function forma_rutina(destino, idforma) {
 				'<select name="dias[' + i + '][' + ejercicioindex + '][ejercicio]">' + ejercicios_options +'</select>'
 			);
 			$(row.insertCell(-1)).append(
-				'S: <input type="number" name="dias[' + i + '][' + ejercicioindex + '][series]" />'
+				'S: <input type="number" size="4" name="dias[' + i + '][' + ejercicioindex + '][series]" />'
 			);
 			$(row.insertCell(-1)).append(
-				'R: <input type="number" name="dias[' + i + '][' + ejercicioindex + '][repeticiones]" />'
+				'R: <input type="number" size="4" name="dias[' + i + '][' + ejercicioindex + '][repeticiones]" />'
 			); 
 		};
 		})(i);
@@ -119,12 +118,29 @@ function despliega_rutina(destino, datos, avance) {
 
 
 function ejecutar() {
+	/*alert("rutina_actual.php?alumno=" + alumno);
 	
-	
-	$.post( "rutina_actual.php", { definicion: $("#nueva_rutina").serializeJSON()})
+	$.post( "rutina_actual.php?alumno=" + alumno, { definicion: $("#nueva_rutina").serializeJSON()})
 		.done(function( data ) {
 			window.location.reload(true); 
-	});
+			
+			
+	});*/
+	
+	var forma = document.createElement("form");
+	forma.method = "POST";
+	forma.action = "rutina_actual.php?alumno=" + alumno;
+	var input = document.createElement("input");
+	input.type = "hidden";
+	input.name = "definicion";
+	input.id = "definicion";
+	input.value = $("#nueva_rutina").serializeJSON()
+
+	alert(input.value);
+	
+	forma.appendChild(input);
+	document.body.appendChild(forma);
+	forma.submit();
 }
 
 // del servidor al movil

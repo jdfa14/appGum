@@ -1,55 +1,39 @@
 <?php
-include_once 'includes/db_connect.php';
-include_once 'includes/functions.php';
- 
-sec_session_start();
+session_start();
 
-login_check($mysqli) or die("No has iniciado sesion");
-
-
-
-
-$username = $_SESSION['username'];
-$user_id = $_SESSION['user_id'];
-
-$conexion = new mysqli(
-	'localhost', 'usuario', 'paydelimon', 'appGym');
-
-if(mysqli_connect_errno()) {
-	printf("Connect failed: %s\n", mysqli_connect_error());
-	exit();
-}
-
-$result = $mysqli->query(
-	"select  * " .
-	"from alumno inner join member on idAlumno = id "
-) or die($mysqli->error.__LINE__);
-
-
-?> 
+    include_once 'includes/basededatos.php';
+    include_once 'includes/funciones.php';
+    
+    
+    $resultado = alumnosDeInstructor($conexion, $_SESSION['usuario']);
+    
+    ?>
+    
+    <!DOCTYPE html>
+<html>
+    <head>
+        <title>Lista de alumnos</title>
+        <link rel="stylesheet" href="styles/main.css" />
+    </head>
+    <body>
 
 <table>
-
-
+<tr><th>Matricula</th><th>Nombre</th><th>Apellido</th></tr>
 <?php
-
-while($row = mysqli_fetch_assoc($result)) {
-	?> 
-		<tr>
-			<td><a href="lista_rutinas.php"><?= $row["username"] ?></a></td>
-			<td></td>
-			<td></td>
-		</tr>
-	<?php
-	
-	$i++;
-}
-
-
-mysqli_close($conexion);
-
+    while($renglon = mysqli_fetch_assoc($resultado)){
 ?>
 
+<tr>
+<td><a href="rutina_actual.php?alumno=<?=$renglon['matricula']?>"><?=$renglon['matricula']?></a></td>
+<td><?=$renglon['nombre']?></td>
+<td><?=$renglon['apellido']?></td>
+</tr>
+
+<?php
+}
+?>
 </table>
 
 
+    </body>
+</html>

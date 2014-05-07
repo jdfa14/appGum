@@ -27,26 +27,16 @@ function xmlAlumnos(){
         var tbody = table.getElementsByTagName("tbody")[0];
         for(var i = 0; i < alumnos.length; i++){
             var tr = document.createElement("tr");
-            tr.setAttribute("onclick","modifica(this)")
-            
             var tdMatricula = document.createElement("td");
             var tdNombre = document.createElement("td");
             var tdApellido = document.createElement("td");
-            
             tdMatricula.innerHTML = alumnos[i].getElementsByTagName("matricula")[0].innerHTML;
             tdNombre.innerHTML = alumnos[i].getElementsByTagName("nombre")[0].innerHTML;
             tdApellido.innerHTML = alumnos[i].getElementsByTagName("apellido")[0].innerHTML;
-            
             tr.appendChild(tdMatricula);
             tr.appendChild(tdNombre);
             tr.appendChild(tdApellido);
-            
             tbody.appendChild(tr);
         }
     }
-}
-
-function modifica(obj){
-    var matricula = obj.getElementsByTagName("td")[0].innerHTML;
-    window.location.href="index.php?matricula="+matricula;
 }
