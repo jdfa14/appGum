@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Secure Login: Log In</title>
+        <title>Iniciar sesion</title>
         <link rel="stylesheet" href="styles/main.css" />
     </head>
     <body>
-        <form action="includes/iniciarSesion.php" method="post">                      
-            Usuario: <input type="text" name="usuario" id="usuario" />
-            Password: <input type="password" name="contrasena" id="contrasena"/>
-            <input type="submit" value="Login" /> 
-        </form>
-        <a href="register.php">Register</a>
+        <div class="formaEntrada">
+            <form action="includes/iniciarSesion.php" method="post">                      
+                <div class="campoEntrada"> Usuario: <input class="textoEntrada" type="text" name="usuario" id="usuario" required="" /></div>
+                <div class="campoEntrada"> Contrase&ntilde;a: <input class="textoEntrada" type="password" name="contrasena" id="contrasena" required=""/> </div>
+                <div class="campoEntrada"> <input class="botonSumbmit" type="submit" value="Iniciar sesion"/> </div>
+            </form>
+            <a href="register.php">Register</a>
+        </div>
     </body>
 </html>
