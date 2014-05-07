@@ -35,12 +35,17 @@
     
     self.buttonIsOn = !self.buttonIsOn;
     
+    [self updateImage];
+    [self.papa updateDia: self.section ejercicio: self.row completado: self.buttonIsOn];
+}
+
+-(void) updateImage{
     if(self.buttonIsOn){
-    UIImage *btnImage1 = [UIImage imageNamed:@"checkbox-checked.png"];
-    [sender setImage:btnImage1 forState:UIControlStateNormal];
+        UIImage *btnImage1 = [UIImage imageNamed:@"checkbox-checked.png"];
+        [self.checkB setImage:btnImage1 forState:UIControlStateNormal];
     } else{
-    UIImage * btnImage2 = [UIImage imageNamed:@"checkbox-unchecked.png"];
-    [sender setImage:btnImage2 forState:UIControlStateNormal];
+        UIImage * btnImage2 = [UIImage imageNamed:@"checkbox-unchecked.png"];
+        [self.checkB setImage:btnImage2 forState:UIControlStateNormal];
     }
 }
 @end

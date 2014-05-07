@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ILTMasterViewController : UITableViewController
+@interface ILTMasterViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic) UITableViewCellAccessoryType accessoryType;
 
+
+-(void) updateDia: (NSInteger) dia ejercicio: (NSInteger) ejercicio completado: (BOOL) completad;
 
 @end

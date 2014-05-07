@@ -28,7 +28,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Do any additional setup after loading the
+    
+    NSUserDefaults *fetchDefaults = [NSUserDefaults standardUserDefaults];
+    
+    // getting an NSString
+    NSString *password = [fetchDefaults objectForKey:@"kPassword"];
+    NSString *user = [fetchDefaults objectForKey:@"kUser"];
+    
+    if (password == nil || user == nil) {
+        return;
+    } else if([self intentaLoginUser:user password:password]) {
+        NSLog(@"Login SUCCESS  con guardados");
+        [self performSegueWithIdentifier:@"correct" sender:self];
+        
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,15 +74,39 @@
     [alertView show];
 }
 
+-(void) tryLogIn{
+    
+}
+
 - (IBAction)loginButton:(id)sender {
+    
+    if([[_usuarioTF text] isEqualToString:@""] || [[_contrasenaTF text] isEqualToString:@""] ) {
+        [self alertStatus:@"Please enter both Username and Password" :@"Login Failed!"];
+    } else if([self intentaLoginUser:[_usuarioTF text] password:[_contrasenaTF text]]) {
+        
+        
+        NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+        
+        [userDef setObject:[_usuarioTF text] forKey:@"kUser"];
+        [userDef setObject:[_contrasenaTF text] forKey:@"kPassword"];
+        
+        [userDef synchronize];
+        
+        [self performSegueWithIdentifier:@"correct" sender:self];
+        
+    }
+    
+    //[self alertStatus:@"Logged in Successfully." :@"Login Success!"];
+    }
+
+-(BOOL) intentaLoginUser: (NSString *) user password: (NSString *) password {
     
     @try {
         
-        if([[_usuarioTF text] isEqualToString:@""] || [[_contrasenaTF text] isEqualToString:@""] ) {
-            [self alertStatus:@"Please enter both Username and Password" :@"Login Failed!"];
-        } else {
-            NSString *post =[[NSString alloc] initWithFormat:@"username=%@&password=%@",[_usuarioTF text],[_contrasenaTF text]];
+       
+            NSString *post =[[NSString alloc] initWithFormat:@"username=%@&password=%@",user,password];
             NSLog(@"PostData: %@",post);
+            
             
             NSURL *url=[NSURL URLWithString:@"http://localhost/login.php"];
             
@@ -102,10 +141,7 @@
                 NSLog(@"%d",success);
                 if(success == 1)
                 {
-                    NSLog(@"Login SUCCESS");
-                    [self performSegueWithIdentifier:@"correct" sender:self];
-                    //[self alertStatus:@"Logged in Successfully." :@"Login Success!"];
-                    
+                    return TRUE;
                 } else {
                     
                     NSString *error_msg = (NSString *) [jsonData objectForKey:@"error_message"];
@@ -117,10 +153,18 @@
                 [self alertStatus:@"Connection Failed" :@"Login Failed!"];
             }
         }
-    }
+    
     @catch (NSException * e) {
         NSLog(@"Exception: %@", e);
         [self alertStatus:@"Login Failed." :@"Login Failed!"];
     }
+    
+    return false;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    [[self view] endEditing:TRUE];
+    
 }
 @end
