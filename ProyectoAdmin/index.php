@@ -6,6 +6,7 @@
     </head>
     <body>
         <div class="formaEntrada">
+            <h1>Inicio sesion</h1>
             <form action="includes/iniciarSesion.php" method="post">                      
                 <div class="campoEntrada"> Usuario: <input class="textoEntrada" type="text" name="usuario" id="usuario" required="" /></div>
                 <div class="campoEntrada"> Contrase&ntilde;a: <input class="textoEntrada" type="password" name="contrasena" id="contrasena" required=""/> </div>
