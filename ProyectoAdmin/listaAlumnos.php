@@ -1,5 +1,7 @@
 <?php
     session_start();
+    include_once 'includes/basededatos.php';
+    include_once 'includes/funciones.php';
 ?>
 <html>
     <head>
@@ -18,14 +20,23 @@
                     <th>Nombre</th>
                     <th>Apellido</th>
                 </tr>
+                <?php
+                    $resultado = alumnosDeInstructor($conexion, $_SESSION['usuario']);
+                    while($renglon = mysqli_fetch_assoc($resultado)){
+                ?>
+                <tr onclick="modificar(this)">
+                    <td><?= $renglon['matricula'] ?></td>
+                    <td><?= $renglon['nombre'] ?></td>
+                    <td><?= $renglon['apellido'] ?></td>
+                </tr>
+                <?php
+                    }
+                ?>
             </table>
             <form action="agregarUsuario.php">
                 <input type="submit" value="Agregar Usuario"/>
             </form>
         </div>
-        <script>
-            getAlumnos('<?= $_SESSION['usuario']?>');
-        </script>
     </body>
     
 </html>
