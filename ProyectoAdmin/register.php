@@ -7,8 +7,8 @@
     </head>
     <body>
         <div class="cuerpo">
-            <h1>Registro de Instructor</h1>
             <div class="formaEntrada">
+                <h1>Registro de Instructor</h1>
                 <form action="includes/insertaInstructor.php" method="post" name="registration_form">
                     <div class="textoEntrada">Username: <input type='text' name='usuario' id='usuario' /></div>
                     <div class="textoEntrada">Email: <input type="text" name="correo" id="correo" /></div>

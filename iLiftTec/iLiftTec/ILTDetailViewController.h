@@ -11,6 +11,11 @@
 @interface ILTDetailViewController : UIViewController
 
 @property (strong, nonatomic) id detailItem;
+- (IBAction)butonEnviar:(id)sender;
+@property (strong, nonatomic) IBOutlet UITextView *comentariosTV;
 
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+
+@property (strong, nonatomic) NSMutableDictionary *avance;
+
 @end
