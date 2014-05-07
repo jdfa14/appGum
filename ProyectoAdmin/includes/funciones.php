@@ -72,3 +72,21 @@ function alumnosDeInstructor($con,$instructor){
     }
     return NULL;
 }
+
+function iniciarSesionAlumno($con,$usuario,$contrasena){
+    $query = "SELECT * FROM alumno WHERE matricula= '".$usuario."';";
+    $result =  mysqli_query($con,$query);
+    if(!$result){
+        return 0;
+    }else{
+        if($row = mysqli_fetch_assoc($result)){
+            if($contrasena == $row['contrasena']){
+                return 1;
+            }else{
+                return 0;
+            }
+        }else{
+            return 0;
+        }
+    }
+}

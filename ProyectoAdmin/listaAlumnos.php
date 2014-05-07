@@ -7,7 +7,11 @@
     <head>
         <meta charset="UTF-8">
         <title>Lista alumnos</title>
-        <script src="js/ajaxLista.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            function modificar(obj){
+                window.location.href="index.php?matricula="+matricula;
+            }
+        </script>
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
