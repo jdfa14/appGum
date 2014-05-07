@@ -4,6 +4,7 @@ include_once 'includes/functions.php';
  
 sec_session_start();
 
+login_check($mysqli) or die;
 isset($_POST['idAlumno'] or die;
 
 $alumno = $_POST['idAlumno'];
@@ -45,7 +46,7 @@ $result = $mysqli->query(
 			$result = $mysqli->query(
 				"select  * " .
 				"from alumno " .
-				"inner join rutina_json on idAlumno = alumno " .
+				"inner join rutina_json on rutinaJsonActual = numRutina " .
 				"inner join member on idAlumno = id " .
 				"where a.idAlumno = " . $alumno
 			) or die($mysqli->error.__LINE__);
@@ -79,7 +80,7 @@ $result = $mysqli->query(
 			</script>
 				<button onclick="ejecutar()"></button>
 			<script>
-				despliega_rutina("contenido", <?=definicion?>, <?=avance?>);
+				despliega_rutina("contenido", <?=$definicion?>, <?=$avance?>);
             </script>
             <p>Return to <a href="index.php">login page</a></p>
         <?php } else { ?>

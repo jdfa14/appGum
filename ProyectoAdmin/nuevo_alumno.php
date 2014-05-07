@@ -33,17 +33,6 @@ $mysqli->query(
 	"where a.idAlumno = " . $user_id
 ) or die($mysqli->error.__LINE__);
 
-create table alumno(
-	idAlumno int not null primary key,
-	
-	instructor int,
-	rutinaActual int,
-	nacimiento date,
-	peso double,
-	sexo enum('f', 'm') not null,
-	foreign key (idAlumno) references member(id),
-	foreign key (instructor) references instructor(idInstructor)
-)engine = InnoDB;
 
  ?>
 
