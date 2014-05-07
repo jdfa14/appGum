@@ -6,4 +6,4 @@
     if(!agregarUsuario($conexion, $_POST['matricula'], $_SESSION['usuario'] ,$_POST['nombres'], $_POST['apellidos'], $_POST['correo'], $_POST['peso'], $nacimiento, $_POST['sexo'], $_POST['matricula'])){
         die("Error con la insercon");
     }
-    header("Location: ../agregarUsuario.php");
+    header("Location: ../listaAlumnos.php");

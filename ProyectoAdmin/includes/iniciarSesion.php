@@ -8,7 +8,7 @@
         session_start();
         $_SESSION['usuario'] = $usuario;
         $_SESSION['contrasena'] = $contrasena;
-        header("Location: ../agregarUsuario.php");
+        header("Location: ../listaAlumnos.php");
     }else{
         print("Error: Datos incorrectos");
         header("Location: ../index.php");

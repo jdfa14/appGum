@@ -57,3 +57,18 @@ function iniciarSesion($con,$usuario,$contrasena){
         }
     }
 }
+
+function alumnosDeInstructor($con,$instructor){
+    $query = "SELECT * FROM alumno WHERE instructor= '".$instructor."';";
+    $result =  mysqli_query($con,$query);
+    $array = array();
+    if(!$result){
+        $row = mysql_fetch_assoc($result);
+        print('No se pudo obtener alumnos. Query :' . $query . $row['nombre']);
+        print('Error :' . mysql_error());
+        return 0;
+    }else{
+        return $result;
+    }
+    return NULL;
+}
