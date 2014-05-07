@@ -21,9 +21,9 @@ and open the template in the editor.
     </head>
     <body>
         <div class="cuerpo">
-            <h1>Agregar Usuario</h1>
-            <p>Nombre del Instructor <?php echo $_SESSION['usuario']?></p>
             <div class="formaEntrada">
+                <h1>Agregar Usuario</h1>
+                <h3>Instrictor: <?php echo $_SESSION['usuario']?></h3>
                 <form action="includes/insertaUsuario.php" method="post">  
                     <div class="campoEntrada" id="divMat">Matricula: <input class="textoEntrada" type="text" name="matricula" id="matricula" placeholder="A01234567" onblur="validMatricula(this)" required=""/> </div>
                     <div class="campoEntrada" id="divNom">Nombre: <input class="textoEntrada" type="text" name="nombres" id="nombres" placeholder="Maria Jose" required=""/> </div>                    
