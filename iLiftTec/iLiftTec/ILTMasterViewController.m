@@ -36,13 +36,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    //[self fetchReports];
+    [self fetchReports];
     /*UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
      self.navigationItem.rightBarButtonItem = addButton;*/
    NSMutableArray *musculo = [[NSMutableArray alloc] initWithObjects: @"Pecho", @"Bicep", @"Espalda", @"Hombro", @"Tricep", @"Trapecio", nil];
    // NSMutableArray *email = [[NSMutableArray alloc] initWithObjects:@"ivan@gmail.com", @"tania@gmail.com", @"aza@gmail.com", @"david@gmail.com", nil];
     
-    _definicion =
+   /* _definicion =
     
     @[
      @[
@@ -136,7 +136,7 @@
              }
          ]
      
-     ];
+     ];*/
     
     _avance = [[NSMutableArray alloc] init];
     for(NSArray *dia in _definicion) {
@@ -190,10 +190,12 @@
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSData* data = [NSData dataWithContentsOfURL:
-                        [NSURL URLWithString: @"http://localhost/loans.js"]];
+                        [NSURL URLWithString: @"http://10.12.19.33/get_rutina.php"]];
         
         NSError* error;
-        _definicion = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+        NSDictionary *dict =
+        [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers | NSJSONReadingAllowFragments error:&error];
+        _definicion = dict[@"dias"];
         NSLog(@"%@", _definicion);
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];

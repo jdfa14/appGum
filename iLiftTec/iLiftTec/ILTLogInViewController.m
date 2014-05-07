@@ -104,11 +104,11 @@
     @try {
         
        
-            NSString *post =[[NSString alloc] initWithFormat:@"username=%@&password=%@",user,password];
+            NSString *post =[[NSString alloc] initWithFormat:@"nombre=%@&contrasena=%@",user,password];
             NSLog(@"PostData: %@",post);
             
             
-            NSURL *url=[NSURL URLWithString:@"http://localhost/login.php"];
+            NSURL *url=[NSURL URLWithString:@"http://localhost/alumnoInicioSesion.php"];
             
             NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
             
