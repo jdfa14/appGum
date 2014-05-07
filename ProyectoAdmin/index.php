@@ -8,8 +8,8 @@
         <form action="includes/iniciarSesion.php" method="post">                      
             Usuario: <input type="text" name="usuario" id="usuario" />
             Password: <input type="password" name="contrasena" id="contrasena"/>
-            <input type="submit" 
-                   value="Login" /> 
+            <input type="submit" value="Login" /> 
         </form>
+        <a href="register.php">Register</a>
     </body>
 </html>
