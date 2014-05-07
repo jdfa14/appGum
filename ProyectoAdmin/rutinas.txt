@@ -1,0 +1,57 @@
+
+
+// del servidor al movil
+var ejemplo_rutina = {
+	"dias" : [
+		[ // dia 0
+			{ // primer ejercicio
+				"ejercicio" : "triceps",
+				"series" : 10,
+				"repeticiones" : 5
+			},
+			{ // segundo
+				"ejercicio" : "pierna",
+				"series" : 12,
+				"repeticiones" : 3
+			}
+		],
+		
+		[ // dia 1
+			{
+				"ejercicio" : "triceps",
+				"series" : 10,
+				"repeticiones" : 5
+			},
+			{
+				"ejercicio" : "pierna",
+				"series" : 12,
+				"repeticiones" : 3
+			}
+		]
+		
+		//... hasta el dia 10
+	],
+	
+	"peso_inicial" : 75.3
+}
+
+//del movil al servidor
+
+var ejemplo_llenado = {
+	"dias" : [
+		[ // dia 0
+			{
+				"completado" : true,
+				"comentarios" : ""
+			},
+			
+			
+			{
+				"completado" : false,
+				"comentarios" : "no hice eso pero corri 12km"
+			}
+		]
+	]
+	
+	"peso_final" : 48.0
+}

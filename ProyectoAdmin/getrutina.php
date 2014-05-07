@@ -61,7 +61,7 @@ $output = array(
 );
 
 echo json_encode($output);
-mysqli_close($mysqli);
+mysqli_close($conexion);
 
 } else { ?>
             {"status": "error"}
