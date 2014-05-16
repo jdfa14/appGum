@@ -7,9 +7,9 @@ include_once 'includes/funciones.php';
 
 
 //login_check($mysqli) or die;
-isset($_GET['alumno']) or die("No se especifico alumno");
+isset($_POST['alumno']) or die("No se especifico alumno");
 
-$alumno = $_GET['alumno'];
+$alumno = $_POST['alumno'];
 
 if(isset($_POST['definicion'])) {
 	

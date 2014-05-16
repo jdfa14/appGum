@@ -1,4 +1,5 @@
 <?php
+
 function agregarUsuario($con,$matricula,$instructor,$nombre,$apellido,$correo,$peso,$nacimiento,$sexo,$contrasena){
     
     $query = "INSERT INTO alumno (matricula, instructor, nombre, apellido, correo, peso, nacimiento, sexo, contrasena) "
@@ -89,4 +90,23 @@ function iniciarSesionAlumno($con,$usuario,$contrasena){
             return 0;
         }
     }
+}
+
+function sesionIniciada($con){
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    if(isset($_SESSION['usuario'],$_SESSION['contrasena'])){
+        return iniciarSesion($con, $_SESSION['usuario'], $_SESSION['contrasena']);
+    }else{
+        return false;
+    }
+}
+
+function cerrarSesion(){
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    session_unset();
+    session_destroy();
 }

@@ -11,9 +11,11 @@
         <meta charset="UTF-8">
         
         <title>Error</title>
+        <link href="css/main.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <div class="error">
+        <h1>Hubo un problema</h1>
+        <div class="formaEntrada">
             <h1>Hubo un problema</h1>
             <p class="mensajeError"> Error: <?= $error?></p>
         </div>

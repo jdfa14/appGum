@@ -1,15 +1,14 @@
 <?php
-session_start();
+    session_start();
 
     include_once 'includes/basededatos.php';
     include_once 'includes/funciones.php';
-    
     
     $resultado = alumnosDeInstructor($conexion, $_SESSION['usuario']);
     
     ?>
     
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <title>Lista de alumnos</title>
