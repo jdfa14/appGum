@@ -59,7 +59,7 @@
                         <?= $renglon['apellido'] ?>
                     </td>
                     <td class="celdaBoton">
-                        <form action="rutina_actual.php" method="GET">
+                        <form action="listaRutinas.php" method="GET">
                             <input type="submit" value="Editar" />
                             <input type="hidden" value="<?=$renglon['matricula']?>" name="alumno"/>
                         </form>

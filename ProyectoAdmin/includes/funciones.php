@@ -1,6 +1,5 @@
 <?php
-
-function agregarUsuario($con,$matricula,$instructor,$nombre,$apellido,$correo,$peso,$nacimiento,$sexo,$contrasena){
+function agregarUsuario($conexion,$matricula,$instructor,$nombre,$apellido,$correo,$peso,$nacimiento,$sexo,$contrasena){
     
     $query = "INSERT INTO alumno (matricula, instructor, nombre, apellido, correo, peso, nacimiento, sexo, contrasena) "
             . "VALUES ("
@@ -13,7 +12,7 @@ function agregarUsuario($con,$matricula,$instructor,$nombre,$apellido,$correo,$p
             . "'".$nacimiento."', "
             . "'".$sexo."', "
             . "'".$contrasena."');";
-    $result =  mysqli_query($con,$query);
+    $result =  mysqli_query($conexion,$query);
     if(!$result){
         print('No se pudo insertar los datos, query :' . $query);
         print('Error :' . mysql_error());
@@ -22,13 +21,13 @@ function agregarUsuario($con,$matricula,$instructor,$nombre,$apellido,$correo,$p
     return 1;
 }
 
-function agregarInstructor($con,$usuario,$correo,$contrasena){
+function agregarInstructor($conexion,$usuario,$correo,$contrasena){
     $query = "INSERT INTO member (username, email, password) "
             . "VALUES ("
             . "'".$usuario."', "
             . "'".$correo."', "
             . "'".$contrasena."');";
-    $result =  mysqli_query($con,$query);
+    $result =  mysqli_query($conexion,$query);
     if(!$result){
         print('No se pudo insertar instructor, query :' . $query);
         print('Error :' . mysql_error());
@@ -37,9 +36,9 @@ function agregarInstructor($con,$usuario,$correo,$contrasena){
     return 1;
 }
 
-function iniciarSesion($con,$usuario,$contrasena){
+function iniciarSesion($conexion,$usuario,$contrasena){
     $query = "SELECT * FROM member WHERE username= '".$usuario."';";
-    $result =  mysqli_query($con,$query);
+    $result =  mysqli_query($conexion,$query);
     if(!$result){
         print('No se pudo iniciar sesion. Query :' . $query);
         print('Error :' . mysql_error());
@@ -59,10 +58,9 @@ function iniciarSesion($con,$usuario,$contrasena){
     }
 }
 
-function alumnosDeInstructor($con,$instructor){
+function alumnosDeInstructor($conexion,$instructor){
     $query = "SELECT * FROM alumno WHERE matricula IN ( SELECT idAlumno FROM member JOIN alumnoinstructor ON (username = idInstructor) WHERE username = '".$instructor."');";
-    $result =  mysqli_query($con,$query);
-    $array = array();
+    $result =  mysqli_query($conexion,$query);
     if(!$result){
         $row = mysql_fetch_assoc($result);
         print('No se pudo obtener alumnos. Query :' . $query . $row['nombre']);
@@ -74,9 +72,9 @@ function alumnosDeInstructor($con,$instructor){
     return NULL;
 }
 
-function iniciarSesionAlumno($con,$usuario,$contrasena){
+function iniciarSesionAlumno($conexion,$usuario,$contrasena){
     $query = "SELECT * FROM alumno WHERE matricula= '".$usuario."';";
-    $result =  mysqli_query($con,$query);
+    $result =  mysqli_query($conexion,$query);
     if(!$result){
         return 0;
     }else{
@@ -89,6 +87,19 @@ function iniciarSesionAlumno($con,$usuario,$contrasena){
         }else{
             return 0;
         }
+    }
+}
+
+function datosAlumno($conexion, $idAlumno){
+    $query = "SELECT * FROM alumno WHERE matricula = '".$idAlumno."';";
+    $result =  mysqli_query($conexion,$query);
+    if(!$result){
+        $row = mysql_fetch_assoc($result);
+        print('No se pudo obtener al alumno. Query :' . $query . $row['nombre']);
+        print('Error :' . mysql_error());
+        return 0;
+    }else{
+        return $result;
     }
 }
 
