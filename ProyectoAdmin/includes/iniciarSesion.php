@@ -8,7 +8,8 @@
         session_start();
         $_SESSION['usuario'] = $usuario;
         $_SESSION['contrasena'] = $contrasena;
-        header("Location: ../listaAlumnos.php");
+        $_SESSION['tipo'] = "I";
+        header("Location: ../instructor.php");
     }else{
         print("Error: Datos incorrectos");
         header("Location: ../index.php");

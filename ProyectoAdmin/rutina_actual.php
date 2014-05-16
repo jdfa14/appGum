@@ -7,9 +7,9 @@ include_once 'includes/funciones.php';
 
 
 //login_check($mysqli) or die;
-isset($_POST['alumno']) or die("No se especifico alumno");
+isset($_GET['alumno']) or die("No se especifico alumno");
 
-$alumno = $_POST['alumno'];
+$alumno = $_GET['alumno'];
 
 if(isset($_POST['definicion'])) {
 	
@@ -38,50 +38,47 @@ $result = $conexion->query(
     <head>
         <meta charset="UTF-8">
         <title>Secure Login: Protected Page</title>
-        <script type="text/JavaScript" src="jquery-1.11.1.min.js"></script> 
-        <script type="text/JavaScript" src="jquery.serialize-object.min.js"></script> 
+        <script type="text/JavaScript" src="js/jquery-1.11.1.min.js"></script> 
+        <script type="text/JavaScript" src="js/jquery.serialize-object.min.js"></script> 
         <script type="text/JavaScript" src="rutinas.js"></script> 
         <link rel="stylesheet" href="css/main.css" />
-        
+        <link href="css/inputs.css" rel="stylesheet" type="text/css"/>
+        <link href="css/tabla.css" rel="stylesheet" type="text/css"/>
         <script>
-        var alumno = "<?=$alumno?>";
+            var alumno = "<?=$alumno?>";
         </script>
     </head>
     <body>
-		<div class="formaEntrada">
+        <div class="formaEntrada">
         <?php 
         
-			$result = $conexion->query(
-				"select  * " .
-				"from alumno " .
-				"inner join rutina_json on rutinaJsonActual = numRutina " .
-				"where matricula = '" . $alumno ."'"
-			) or die($conexion->error.__LINE__);
-			
-			$sexo = '';
-			$peso_inicial = '';
-			$peso_final = '';
-			$dia0 = '';
-			$definicion = '';
-			$avance = '';
-			
-			if($row = mysqli_fetch_assoc($result)) {
-				$sexo = $row['sexo'];
-				$peso_inicial = $row['pesoInicial'];
-				$peso_final = $row['pesoFinal'];
-				$dia0 = $row['dia0'];
-				$definicion = $row['definicion'];
-				$avance = $row['avance'];
-				
-			}
-			?>
-            
-            
+                $result = $conexion->query(
+                        "select  * " .
+                        "from alumno " .
+                        "inner join rutina_json on rutinaJsonActual = numRutina " .
+                        "where matricula = '" . $alumno ."'"
+                ) or die($conexion->error.__LINE__);
+
+                $sexo = '';
+                $peso_inicial = '';
+                $peso_final = '';
+                $dia0 = '';
+                $definicion = '';
+                $avance = '';
+
+                if($row = mysqli_fetch_assoc($result)) {
+                        $sexo = $row['sexo'];
+                        $peso_inicial = $row['pesoInicial'];
+                        $peso_final = $row['pesoFinal'];
+                        $dia0 = $row['dia0'];
+                        $definicion = $row['definicion'];
+                        $avance = $row['avance'];
+
+                }
+                ?>
             <div id="contenido"></div>
-            
-            
             <script>
-				forma_rutina("contenido", "nueva_rutina");
+                forma_rutina("contenido", "nueva_rutina");
 			</script>
 				<button onclick="ejecutar()">Ejecutar</button>
 			
@@ -94,7 +91,6 @@ $result = $conexion->query(
 				despliega_rutina("contenido", <?=$definicion?>, <?= ($avance ? $avance : "null") ?>);
             </script>
             <?php } ?>
-            
             <p>Return to <a href="index.php">login page</a></p>
         </div>
     </body>

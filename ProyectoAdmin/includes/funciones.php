@@ -60,7 +60,7 @@ function iniciarSesion($con,$usuario,$contrasena){
 }
 
 function alumnosDeInstructor($con,$instructor){
-    $query = "SELECT * FROM alumno WHERE instructor= '".$instructor."';";
+    $query = "SELECT * FROM alumno WHERE matricula IN ( SELECT idAlumno FROM member JOIN alumnoinstructor ON (username = idInstructor) WHERE username = '".$instructor."');";
     $result =  mysqli_query($con,$query);
     $array = array();
     if(!$result){
@@ -92,11 +92,15 @@ function iniciarSesionAlumno($con,$usuario,$contrasena){
     }
 }
 
+function rutinasDeAlumno($conexion, $idAlumno){
+    
+}
+
 function sesionIniciada($con){
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
-    if(isset($_SESSION['usuario'],$_SESSION['contrasena'])){
+    if(isset($_SESSION['usuario'],$_SESSION['contrasena'],$_SESSION['tipo'])){
         return iniciarSesion($con, $_SESSION['usuario'], $_SESSION['contrasena']);
     }else{
         return false;

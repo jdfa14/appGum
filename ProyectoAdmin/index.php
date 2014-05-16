@@ -1,3 +1,17 @@
+<?php
+    session_start();
+    include_once 'includes/basededatos.php';
+    include_once 'includes/funciones.php';
+    
+    if(sesionIniciada($conexion)){
+        $tipo = $_SESSION['tipo'];
+        echo $tipo;
+        if($tipo == "I"){
+            header("Location: instructor.php");
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
