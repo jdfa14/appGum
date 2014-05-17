@@ -79,7 +79,7 @@ $result = $conexion->query(
             <div id="contenido"></div>
             <script>
                 forma_rutina("contenido", "nueva_rutina");
-			</script>
+            </script>
 				<button onclick="ejecutar()">Ejecutar</button>
 			
 			<?php

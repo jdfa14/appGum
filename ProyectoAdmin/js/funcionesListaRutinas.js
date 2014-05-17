@@ -85,6 +85,7 @@ function guardarActividad(idTabla){
     dia = dia + 1;
 
     cancelarActividad(idTabla);
+    obtenerJson(idTabla);
 }
 
 function cancelarActividad(idTabla){
@@ -186,7 +187,7 @@ function agregarEjercicio(celda,idTabla){
     botonC.value = "Cancelar";
     input3.name = "completado";
     input3.setAttribute("onClick","return false");
-    botonG.setAttribute("onClick","guardarEjercicio(this)");
+    botonG.setAttribute("onClick","guardarEjercicio(this,'"+idTabla+"')");
     botonC.setAttribute("onClick","cancelarEjercicio(this)");
     
     select.appendChild(option1);
@@ -314,6 +315,70 @@ function poblar(celda){
     }
 }
 
-function guardarEjercicio(celda){
+function guardarEjercicio(celda,idTabla){
+    var tabla = document.getElementById(idTabla);
+    var indice = celda.parentNode.parentNode.rowIndex + 1;
+    var renglon = celda.parentNode.parentNode;
+    var trNuevo = tabla.insertRow(indice);
     
+    var musculo = renglon.cells[0].firstChild.value;
+    var ejercicio = renglon.cells[1].firstChild.value;
+    var series = renglon.cells[2].firstChild.value;
+    var repeticiones = renglon.cells[3].firstChild.value;
+    
+    if(musculo === "" || ejercicio === "" || series === "" || series <= 0 || repeticiones === "" || repeticiones <= 0){
+        alert("Favor de llenar todos los campos");
+        return;
+    }
+    
+    var td1 = trNuevo.insertCell();
+    var td2 = trNuevo.insertCell();
+    var td3 = trNuevo.insertCell();
+    var td4 = trNuevo.insertCell();
+    var td5 = trNuevo.insertCell();
+    
+    td1.innerHTML = musculo;
+    td2.innerHTML = ejercicio;
+    td3.innerHTML = series;
+    td4.innerHTML = repeticiones;
+    td5.innerHTML = "NO";
+    
+    trNuevo.className = "ejercicio";
+    renglon.parentNode.removeChild(renglon);
+    obtenerJson(idTabla);
+}
+
+function obtenerJson(idTabla){
+    var tabla = document.getElementById(idTabla);
+    var json = '{ "dias": [ ';
+    var banderaAux = 0;
+    for(var i = tabla.rows.length; i >= celdaInicial; i--){
+        var renglon = tabla.rows[i];
+        if(renglon.className == "escondido" || renglon.className == "mostrando"){//entonces es un nuevo dia
+            if(banderaAux !== 0){
+                json += '}],[{';
+            }else{
+                json += '[{';
+                banderaAux = 1;
+            }
+            i++;//saltarnos el renglon del boton
+        }else if(renglon.className === "ejercicio"){
+            
+            var musculo = renglon.cells[0].innerHTML;
+            var ejercicio = renglon.cells[1].innerHTML;
+            var series = renglon.cells[2].innerHTML;
+            var repeticiones = renglon.cells[3].innerHTML;
+            var estado = renglon.cells[4].innerHTML;
+            
+            json += '"musculo": "'+musculo+'",';
+            json += '"ejercicio": "'+ejercicio+'",';
+            json += '"series": "'+series+'",';
+            json += '"repeticiones": "'+repeticiones+'",';
+            json += '"estado": "'+estado+'"';
+            //json += '},{'
+        }
+    }
+    json +='}]]}';
+    var txt = document.getElementById("test");
+    txt.innerHTML = json;
 }

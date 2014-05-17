@@ -71,7 +71,7 @@
                 <?php
                     }
                 ?>
-                <tr>
+                <tr >
                     <td colspan="5">
                         <form action="agregarUsuario.php">
                             <input  type="submit" value="Agregar Usuario"/>
