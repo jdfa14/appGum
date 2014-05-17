@@ -1,6 +1,37 @@
+var sendReq = getXmlHttpRequestObject();
+var receiveReq = getXmlHttpRequestObject();
+
+function getXmlHttpRequestObject() {
+	if (window.XMLHttpRequest) {
+		return new XMLHttpRequest();
+	} else if(window.ActiveXObject) {
+		return new ActiveXObject("Microsoft.XMLHTTP");
+	} else {
+		echo("Ajax not working");
+	}
+}
+
+function guardarJson(idAlumno,idInstructor,json) {
+    if (receiveReq.readyState == 4 || receiveReq.readyState == 0) {
+        var param = "";
+        param += "idAlumno="+idAlumno + "&";
+        param += "idInstructor="+idInstructor + "&";
+        param += "json="+json;
+        alert('servidor/actualizarRutina.php?' + param);
+        receiveReq.open("GET", 'servidor/actualizarRutina.php?' + param , true);
+        receiveReq.onreadystatechange = test; 
+        receiveReq.send(null);
+    }
+}
+
+function test(){
+    
+}
+
 var dia = 1;
 var celdaInicial = 2;
 var cantidadCeldas = 6;
+
 function agregaActividad(idTabla){
     reset(idTabla);
     var tabla = document.getElementById(idTabla);
@@ -186,7 +217,6 @@ function agregarEjercicio(celda,idTabla){
     botonG.value = "Guardar";
     botonC.value = "Cancelar";
     input3.name = "completado";
-    input3.setAttribute("onClick","return false");
     botonG.setAttribute("onClick","guardarEjercicio(this,'"+idTabla+"')");
     botonC.setAttribute("onClick","cancelarEjercicio(this)");
     
@@ -307,6 +337,150 @@ function poblar(celda){
             selector.add(option5);
             selector.add(option6);
             selector.add(option7);
+            selector.add(option8);
+            selector.add(option9);
+            break;
+        }
+        case "Biceps" :{
+            var option0 = document.createElement("option");
+            var option1 = document.createElement("option");
+            var option2 = document.createElement("option");
+            var option3 = document.createElement("option");
+            var option4 = document.createElement("option");
+            var option5 = document.createElement("option");
+            var option6 = document.createElement("option");
+            var option7 = document.createElement("option");
+
+            option0.value = option0.innerHTML = "";
+            option1.value = option1.innerHTML = "Predicador barra";
+            option2.value = option2.innerHTML = "Predicador mancuerna";
+            option3.value = option3.innerHTML = "Curl mancuerna";
+            option4.value = option4.innerHTML = "Curl sentado";
+            option5.value = option5.innerHTML = "Curl inclinado";
+            option6.value = option6.innerHTML = "Conc. mancuerna";
+            option7.value = option7.innerHTML = "Jalon con polea";
+
+            selector.add(option0);
+            selector.add(option1);
+            selector.add(option2);
+            selector.add(option3);
+            selector.add(option4);
+            selector.add(option5);
+            selector.add(option6);
+            selector.add(option7);
+            break;
+        }
+        case "Triceps" :{
+            var option0 = document.createElement("option");
+            var option1 = document.createElement("option");
+            var option2 = document.createElement("option");
+            var option3 = document.createElement("option");
+            var option4 = document.createElement("option");
+            var option5 = document.createElement("option");
+            var option6 = document.createElement("option");
+            var option7 = document.createElement("option");
+            var option8 = document.createElement("option");
+
+            option0.value = option0.innerHTML = "";
+            option1.value = option1.innerHTML = "Copa tras nuca";
+            option2.value = option2.innerHTML = "Mancuerna";
+            option3.value = option3.innerHTML = "Una mano";
+            option4.value = option4.innerHTML = "Jalones c/ polea frente";
+            option5.value = option5.innerHTML = "Jalones c/ polea detras";
+            option6.value = option6.innerHTML = "Para de mula 2 manos";
+            option7.value = option7.innerHTML = "Curl frances volado";
+            option8.value = option8.innerHTML = "Curl tras nuca";
+
+            selector.add(option0);
+            selector.add(option1);
+            selector.add(option2);
+            selector.add(option3);
+            selector.add(option4);
+            selector.add(option5);
+            selector.add(option6);
+            selector.add(option7);
+            selector.add(option8);
+            break;
+        }
+        case "Hombro" :{
+            var option0 = document.createElement("option");
+            var option1 = document.createElement("option");
+            var option2 = document.createElement("option");
+            var option3 = document.createElement("option");
+            var option4 = document.createElement("option");
+            var option5 = document.createElement("option");
+            var option6 = document.createElement("option");
+            var option7 = document.createElement("option");
+            var option8 = document.createElement("option");
+
+            option0.value = option0.innerHTML = "";
+            option1.value = option1.innerHTML = "Trapecio";
+            option2.value = option2.innerHTML = "Press tras nuca";
+            option3.value = option3.innerHTML = "Press mancuernas";
+            option4.value = option4.innerHTML = "Press frente";
+            option5.value = option5.innerHTML = "Flyes laterales";
+            option6.value = option6.innerHTML = "Flyes frontales";
+            option7.value = option7.innerHTML = "Mariposa";
+            option8.value = option8.innerHTML = "Ext. polea";
+
+            selector.add(option0);
+            selector.add(option1);
+            selector.add(option2);
+            selector.add(option3);
+            selector.add(option4);
+            selector.add(option5);
+            selector.add(option6);
+            selector.add(option7);
+            selector.add(option8);
+            break;
+        }
+        case "Antebrazo" :{
+            var option0 = document.createElement("option");
+            var option1 = document.createElement("option");
+            var option2 = document.createElement("option");
+            var option3 = document.createElement("option");
+            var option4 = document.createElement("option");
+            var option5 = document.createElement("option");
+            var option6 = document.createElement("option");
+
+            option0.value = option0.innerHTML = "";
+            option1.value = option1.innerHTML = "Con barra";
+            option2.value = option2.innerHTML = "Con barra de frente";
+            option3.value = option3.innerHTML = "Con barra incodo";
+            option4.value = option4.innerHTML = "Con mancuernas";
+            option5.value = option5.innerHTML = "Con mancuernas incodo";
+            option6.value = option6.innerHTML = "Con barra espalda";
+
+            selector.add(option0);
+            selector.add(option1);
+            selector.add(option2);
+            selector.add(option3);
+            selector.add(option4);
+            selector.add(option5);
+            selector.add(option6);
+            break;
+        }
+        case "Abdomen" :{
+            var option0 = document.createElement("option");
+            var option1 = document.createElement("option");
+            var option2 = document.createElement("option");
+            var option3 = document.createElement("option");
+            var option4 = document.createElement("option");
+            var option5 = document.createElement("option");
+
+            option0.value = option0.innerHTML = "";
+            option1.value = option1.innerHTML = "Con mancuernas";
+            option2.value = option2.innerHTML = "Inclinado cabeza abajo";
+            option3.value = option3.innerHTML = "Inclinado cabeza arriba";
+            option4.value = option4.innerHTML = "Con pies al aire";
+            option5.value = option5.innerHTML = "Piernas y pecho al aire";
+
+            selector.add(option0);
+            selector.add(option1);
+            selector.add(option2);
+            selector.add(option3);
+            selector.add(option4);
+            selector.add(option5);
             break;
         }
         default: {
@@ -325,6 +499,7 @@ function guardarEjercicio(celda,idTabla){
     var ejercicio = renglon.cells[1].firstChild.value;
     var series = renglon.cells[2].firstChild.value;
     var repeticiones = renglon.cells[3].firstChild.value;
+    var avance = renglon.cells[4].firstChild.checked;
     
     if(musculo === "" || ejercicio === "" || series === "" || series <= 0 || repeticiones === "" || repeticiones <= 0){
         alert("Favor de llenar todos los campos");
@@ -336,13 +511,20 @@ function guardarEjercicio(celda,idTabla){
     var td3 = trNuevo.insertCell();
     var td4 = trNuevo.insertCell();
     var td5 = trNuevo.insertCell();
+    var td6 = trNuevo.insertCell();
+    
+    var boton = document.createElement("input");
     
     td1.innerHTML = musculo;
     td2.innerHTML = ejercicio;
     td3.innerHTML = series;
     td4.innerHTML = repeticiones;
-    td5.innerHTML = "NO";
+    td5.innerHTML = avance ? "SI" : "NO";
+    boton.type = "button";
+    boton.value = "editar";
+    boton.setAttribute("onClick","editarEjercicio(this)");
     
+    td6.appendChild(boton);
     trNuevo.className = "ejercicio";
     renglon.parentNode.removeChild(renglon);
     obtenerJson(idTabla);
@@ -350,9 +532,10 @@ function guardarEjercicio(celda,idTabla){
 
 function obtenerJson(idTabla){
     var tabla = document.getElementById(idTabla);
+    var txt = document.getElementById("test");
     var json = '{ "dias": [ ';
     var banderaAux = 0;
-    for(var i = tabla.rows.length; i >= celdaInicial; i--){
+    for(var i = celdaInicial; i < tabla.rows.length; i++){
         var renglon = tabla.rows[i];
         if(renglon.className == "escondido" || renglon.className == "mostrando"){//entonces es un nuevo dia
             if(banderaAux !== 0){
@@ -369,16 +552,20 @@ function obtenerJson(idTabla){
             var series = renglon.cells[2].innerHTML;
             var repeticiones = renglon.cells[3].innerHTML;
             var estado = renglon.cells[4].innerHTML;
+            estado = estado == "NO" ? 0 : 1;
             
             json += '"musculo": "'+musculo+'",';
             json += '"ejercicio": "'+ejercicio+'",';
             json += '"series": "'+series+'",';
             json += '"repeticiones": "'+repeticiones+'",';
             json += '"estado": "'+estado+'"';
-            //json += '},{'
+            json += '},{'
         }
     }
     json +='}]]}';
-    var txt = document.getElementById("test");
-    txt.innerHTML = json;
+    json = json.split(",{}").join("");
+    document.getElementById("test").innerHTML = json;
+    var idInstructor = document.getElementById("idInstructor").value;
+    var idAlumno = document.getElementById("idAlumno").value;
+    guardarJson(idAlumno,idInstructor,json);
 }

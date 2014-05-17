@@ -40,17 +40,18 @@
                     <th>Matricula</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <th class="celdaBoton">Borrar</th>
                     <th class="celdaBoton">Editar</th>
+                    <th class="celdaBoton">Borrar</th>
                 </tr>
                 <?php
                     $resultado = alumnosDeInstructor($conexion, $_SESSION['usuario']);
                     while($renglon = mysqli_fetch_assoc($resultado)){
+                        if($renglon['fechaFinal'] == null){
                 ?>
                 
-                <tr id="<?=$renglon['matricula']?>">
+                <tr id="<?=$renglon['idAlumno']?>">
                     <td>
-                        <?=$renglon['matricula']?>
+                        <?=$renglon['idAlumno']?>
                     </td>
                     <td>
                         <?= $renglon['nombre'] ?>
@@ -61,14 +62,15 @@
                     <td class="celdaBoton">
                         <form action="listaRutinas.php" method="GET">
                             <input type="submit" value="Editar" />
-                            <input type="hidden" value="<?=$renglon['matricula']?>" name="alumno"/>
+                            <input type="hidden" value="<?=$renglon['idAlumno']?>" name="alumno"/>
                         </form>
                     </td>
                     <td class="celdaBoton">
-                        <input onclick="eliminar('<?=$renglon['matricula']?>')" type="button" value="Borrar" />
+                        <input onclick="eliminar('<?=$renglon['idAlumno']?>')" type="button" value="Borrar" />
                     </td>
                 </tr>
                 <?php
+                        }
                     }
                 ?>
                 <tr >

@@ -1,6 +1,6 @@
 <?php
     include_once '../includes/basededatos.php';
-    include_once '../includes/funciones.php';
+    include_once '../includes/funcionesAlumno.php';
     
     session_start();
     
@@ -10,7 +10,6 @@
     
     if(iniciarSesionAlumno($conexion, $matricula, $contrasena)){
         $_SESSION['matricula'] = $matricula;
-        
         echo '{"success":1}';
     }else{
         echo '{"success":0,"error_message":"Username and/or password is invalid. "}';

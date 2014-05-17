@@ -20,8 +20,8 @@
                 </tr>
                 <tr>
                     <td>
-                        <form action="listaAlumnos.php" method="post">                      
-                            <input type="submit" value="Alumnos" style="width: 200px">
+                        <form action="includes/cerrarSesion.php" method="post">                      
+                            <input type="submit" value="Cerrar Sesion" style="width: 200px">
                         </form>
                     </td>
                 </tr>
