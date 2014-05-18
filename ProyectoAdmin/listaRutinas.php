@@ -38,8 +38,10 @@
                 </td>
             </tr>
         </table>
-        <textarea id="test">
-                    
+        <textarea id="test">    
         </textarea>
+        <script>
+            imprimirRutinas('<?=$matricula?>');
+        </script>
     </body>
 </html>

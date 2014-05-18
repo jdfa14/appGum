@@ -11,6 +11,6 @@
     font-weight: bold;
 }
 
-.renglonEscondido{
+.renglonEscondido, .ejercicioEscondido  {
     display: none;
 }

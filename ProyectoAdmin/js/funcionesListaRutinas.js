@@ -1,5 +1,8 @@
 var sendReq = getXmlHttpRequestObject();
 var receiveReq = getXmlHttpRequestObject();
+var dia = 1;
+var celdaInicial = 2;
+var cantidadCeldas = 7;
 
 function getXmlHttpRequestObject() {
 	if (window.XMLHttpRequest) {
@@ -17,20 +20,44 @@ function guardarJson(idAlumno,idInstructor,json) {
         param += "idAlumno="+idAlumno + "&";
         param += "idInstructor="+idInstructor + "&";
         param += "json="+json;
-        alert('servidor/actualizarRutina.php?' + param);
         receiveReq.open("GET", 'servidor/actualizarRutina.php?' + param , true);
-        receiveReq.onreadystatechange = test; 
         receiveReq.send(null);
     }
 }
 
-function test(){
-    
+function imprimirRutinas(idAlumno) {
+    if (receiveReq.readyState == 4 || receiveReq.readyState == 0) {
+        var param = "";
+        param += "idAlumno="+idAlumno;
+        receiveReq.open("GET", 'servidor/obtenerJson.php?' + param , true);
+        receiveReq.onreadystatechange = interpretarJson; 
+        receiveReq.send(null);
+    }
 }
 
-var dia = 1;
-var celdaInicial = 2;
-var cantidadCeldas = 6;
+function interpretarJson(){
+    if (receiveReq.readyState === 4) {
+        var idTabla = 'rutinas';
+        var json = receiveReq.responseText;
+        var arrDias = JSON.parse(json)['dias'];
+        for(var i = 0; i < arrDias.length; i++){
+            crearActividad(idTabla,'Dia ' + dia);
+            var rutina = arrDias[i];
+            for(var j = 0; j < rutina.length; j++){
+                var ejercicioD = rutina[j];
+                if(ejercicioD.constructor === {}.constructor){
+                    var musculo = ejercicioD['musculo'];
+                    var ejercicio = ejercicioD['ejercicio'];
+                    var series = ejercicioD['series'];
+                    var repeticiones = ejercicioD['repeticiones'];
+                    var avance = ejercicioD['avance'];
+                    crearEjercicio(idTabla,celdaInicial + 3,musculo,ejercicio,series,repeticiones,avance,true);
+                }
+            }
+            dia ++;
+        }
+    }
+}
 
 function agregaActividad(idTabla){
     reset(idTabla);
@@ -68,13 +95,23 @@ function agregaActividad(idTabla){
 function guardarActividad(idTabla){
     var tabla = document.getElementById(idTabla);
     var forma = tabla.getElementsByTagName("div")[0];
-    var nombre = forma.getElementsByTagName("input")[0];
+    var nombre = forma.getElementsByTagName("input")[0].value;
+    crearActividad(idTabla,nombre);
+    cancelarActividad(idTabla);
+    obtenerJson(idTabla);
+    dia = dia + 1;
+}
+
+function crearActividad(idTabla,nombre){
+    var tabla = document.getElementById(idTabla);
     var tr = tabla.insertRow(celdaInicial);
     var trBotonAgregar = tabla.insertRow(celdaInicial + 1);
     var trEncabezados = tabla.insertRow(celdaInicial + 2);
-    var td = document.createElement("td");
+    var td = tr.insertCell();
+    var td2 = tr.insertCell();
     var tdBotonAgregar = document.createElement("td");
     var boton = document.createElement("input");
+    var botonB = document.createElement("input");
 
     var th1 = document.createElement("th");
     var th2 = document.createElement("th");
@@ -91,20 +128,26 @@ function guardarActividad(idTabla){
     th6.innerHTML = "Opciones";
 
     boton.type = "button";
+    botonB.type = "button";
     boton.value = "Agregar Ejercicio";
-    boton.setAttribute("onClick","agregarEjercicio(this,'"+idTabla+"','"+nombre.value+"')");
+    botonB.value = "Borrar Actividad";
+    boton.setAttribute("onClick","agregarEjercicio(this,'"+idTabla+"')");
+    botonB.setAttribute("onClick","borrarActivdad(this,'"+idTabla+"')");
 
     td.className = "celdaInteractiva";
-    td.innerHTML = nombre.value;
-    td.setAttribute("colspan",cantidadCeldas);
+    td.innerHTML = nombre;
+    td.setAttribute("colspan",cantidadCeldas - 1);
     td.setAttribute("onclick","mostrarOpciones(this,'"+idTabla+"')");
-    tdBotonAgregar.setAttribute("colspan",cantidadCeldas);
+    td2.setAttribute("style","width: 20px");
+    tdBotonAgregar.setAttribute("colspan",cantidadCeldas + 1);
+    th2.setAttribute("colspan",2);
     tr.className = "escondido";
     trBotonAgregar.className = "renglonEscondido";
     trEncabezados.className = "renglonEscondido";
 
     tdBotonAgregar.appendChild(boton);
-
+    td2.appendChild(botonB);
+    
     trEncabezados.appendChild(th1);
     trEncabezados.appendChild(th2);
     trEncabezados.appendChild(th3);
@@ -112,12 +155,8 @@ function guardarActividad(idTabla){
     trEncabezados.appendChild(th5);
     trEncabezados.appendChild(th6);
     trBotonAgregar.appendChild(tdBotonAgregar);
-    tr.appendChild(td);
-    dia = dia + 1;
-
-    cancelarActividad(idTabla);
-    obtenerJson(idTabla);
 }
+
 
 function cancelarActividad(idTabla){
     var tabla = document.getElementById(idTabla);
@@ -131,12 +170,14 @@ function cancelarActividad(idTabla){
 
 function mostrarOpciones(row,idTabla){
     if(row.parentNode.className === "escondido"){
+        reset(idTabla);
         var tabla = document.getElementById(idTabla);
         var index = row.parentNode.rowIndex + 1;
         row.parentNode.className = "mostrando";
 
         while(index < tabla.rows.length && tabla.rows[index].className !== "escondido"){
-            tabla.rows[index].className = "";
+            
+            tabla.rows[index].className =tabla.rows[index].className == "renglonEscondido" ? "escondeme" : tabla.rows[index].className == "ejercicioEscondido" ? "ejercicio" : tabla.rows[index].className;
             index++;
         }
     }else{
@@ -149,8 +190,9 @@ function reset(idTabla){
     for(var i = celdaInicial; i < tabla.rows.length; i++){
         if(tabla.rows[i].className == "mostrando"){
             tabla.rows[i].className = "escondido";
-        }
-        if(tabla.rows[i].className != "escondido"){
+        }else if(tabla.rows[i].className == "ejercicio"){
+            tabla.rows[i].className = "ejercicioEscondido";
+        }else if(tabla.rows[i].className == "escondeme"){
             tabla.rows[i].className = "renglonEscondido";
         }
     }
@@ -163,6 +205,7 @@ function agregarEjercicio(celda,idTabla){
     
     var td1 = trNuevo.insertCell();
     var td2 = trNuevo.insertCell();
+    td2.setAttribute("colspan",2);
     var td3 = trNuevo.insertCell();
     var td4 = trNuevo.insertCell();
     var td5 = trNuevo.insertCell();
@@ -189,25 +232,15 @@ function agregarEjercicio(celda,idTabla){
     
     select.setAttribute("onchange","poblar(this)");
     
-    option1.value = "";
-    option2.value = "Pierna";
-    option3.value = "Pecho";
-    option4.value = "Espalda";
-    option5.value = "Biceps";
-    option6.value = "Triceps";
-    option7.value = "Hombros";
-    option8.value = "Antebrazo";
-    option9.value = "Abdomen";
-    
-    option1.innerHTML = "";
-    option2.innerHTML = "Pierna";
-    option3.innerHTML = "Pecho";
-    option4.innerHTML = "Espalda";
-    option5.innerHTML = "Biceps";
-    option6.innerHTML = "Triceps";
-    option7.innerHTML = "Hombros";
-    option8.innerHTML = "Antebrazo";
-    option9.innerHTML = "Abdomen";
+    option1.innerHTML = option1.value = "";
+    option2.innerHTML = option2.value = "Pierna";
+    option3.innerHTML = option3.value = "Pecho";
+    option4.innerHTML = option4.value = "Espalda";
+    option5.innerHTML = option5.value = "Biceps";
+    option6.innerHTML = option6.value = "Triceps";
+    option7.innerHTML = option7.value = "Hombros";
+    option8.innerHTML = option8.value = "Antebrazo";
+    option9.innerHTML = option9.value = "Abdomen";
     
     input1.type = "number";
     input2.type = "number";
@@ -219,6 +252,7 @@ function agregarEjercicio(celda,idTabla){
     input3.name = "completado";
     botonG.setAttribute("onClick","guardarEjercicio(this,'"+idTabla+"')");
     botonC.setAttribute("onClick","cancelarEjercicio(this)");
+    trNuevo.className = "escondeme";
     
     select.appendChild(option1);
     select.appendChild(option2);
@@ -239,6 +273,13 @@ function agregarEjercicio(celda,idTabla){
     td6.appendChild(botonC);
 }
 
+function cancelarEjercicio(celda){
+    celda.parentNode.parentNode.remove(celda.parentNode);
+}
+
+function editarEjercicio(celda){
+    var renglon = celda.parentNode;
+}
 function poblar(celda){
     var renglon = celda.parentNode.parentNode;
     var musculo = celda.value;
@@ -493,7 +534,7 @@ function guardarEjercicio(celda,idTabla){
     var tabla = document.getElementById(idTabla);
     var indice = celda.parentNode.parentNode.rowIndex + 1;
     var renglon = celda.parentNode.parentNode;
-    var trNuevo = tabla.insertRow(indice);
+    
     
     var musculo = renglon.cells[0].firstChild.value;
     var ejercicio = renglon.cells[1].firstChild.value;
@@ -506,6 +547,15 @@ function guardarEjercicio(celda,idTabla){
         return;
     }
     
+    crearEjercicio(idTabla,indice,musculo,ejercicio,series,repeticiones,avance,false);
+    
+    renglon.parentNode.removeChild(renglon);
+    obtenerJson(idTabla);
+}
+
+function crearEjercicio(idTabla,indice,musculo,ejercicio,series,repeticiones,avance,oculto){
+    var tabla = document.getElementById(idTabla);
+    var trNuevo = tabla.insertRow(indice);
     var td1 = trNuevo.insertCell();
     var td2 = trNuevo.insertCell();
     var td3 = trNuevo.insertCell();
@@ -520,14 +570,17 @@ function guardarEjercicio(celda,idTabla){
     td3.innerHTML = series;
     td4.innerHTML = repeticiones;
     td5.innerHTML = avance ? "SI" : "NO";
+    
     boton.type = "button";
     boton.value = "editar";
     boton.setAttribute("onClick","editarEjercicio(this)");
-    
+    td2.setAttribute("colspan",2);
     td6.appendChild(boton);
-    trNuevo.className = "ejercicio";
-    renglon.parentNode.removeChild(renglon);
-    obtenerJson(idTabla);
+    if(oculto){
+        trNuevo.className = "ejercicioEscondido";
+    }else{
+        trNuevo.className = "ejercicio";
+    }
 }
 
 function obtenerJson(idTabla){
@@ -545,7 +598,7 @@ function obtenerJson(idTabla){
                 banderaAux = 1;
             }
             i++;//saltarnos el renglon del boton
-        }else if(renglon.className === "ejercicio"){
+        }else if(renglon.className === "ejercicio" || renglon.className === "ejercicioEscondido"){
             
             var musculo = renglon.cells[0].innerHTML;
             var ejercicio = renglon.cells[1].innerHTML;
@@ -558,12 +611,14 @@ function obtenerJson(idTabla){
             json += '"ejercicio": "'+ejercicio+'",';
             json += '"series": "'+series+'",';
             json += '"repeticiones": "'+repeticiones+'",';
-            json += '"estado": "'+estado+'"';
+            json += '"avance": "'+estado+'"';
             json += '},{'
         }
     }
     json +='}]]}';
     json = json.split(",{}").join("");
+    
+    
     document.getElementById("test").innerHTML = json;
     var idInstructor = document.getElementById("idInstructor").value;
     var idAlumno = document.getElementById("idAlumno").value;
