@@ -100,8 +100,6 @@ function datosAlumno($conexion, $idAlumno){
     $query = "SELECT * FROM alumno WHERE idAlumno = '".$idAlumno."';";
     $result =  mysqli_query($conexion,$query);
     if(!$result){
-        print('No se pudo obtener al alumno. Query :' . $query );
-        print('Error :' . mysql_error());
         return 0;
     }else{
         return mysqli_fetch_assoc($result);
@@ -118,14 +116,10 @@ function rutinasDeAlumno($conexion, $idAlumno , $idInstructor){
         $idInstructor = $renglon['username'];
     }
     
-    
     $query = "SELECT definicion FROM alumnoInstructor WHERE idAlumno='".$idAlumno."' and idInstructor='".$idInstructor."' and fechaFinal IS NULL;";
     $result =  mysqli_query($conexion,$query);
     if(!$result){
-        print('No se pudo actualizar el json. Query :' . $query);
-        print('Error :' . mysql_error());
-        die('Oops');
-        return NULL;
+        return "null";
     }
     $renglon = mysqli_fetch_assoc($result);
     $json = $renglon['definicion'];
@@ -152,6 +146,15 @@ function cerrarSesion(){
 }
 
 function actualizaJson($conexion,$json,$idAlumno,$idInstructor){
+    if($idInstructor === NULL){
+        $query1 = "SELECT username
+            FROM member JOIN alumnoInstructor ON (username = idInstructor) JOIN alumno ON ( alumnoInstructor.idAlumno = alumno.idAlumno)
+            WHERE fechaFinal IS NULL AND alumno.idAlumno = '".$idAlumno."';";
+        $result1 =  mysqli_query($conexion,$query1);
+        $renglon = mysqli_fetch_assoc($result1);
+        $idInstructor = $renglon['username'];
+    }
+    
     $query = "UPDATE alumnoinstructor SET definicion ='".$json."' WHERE idAlumno='".$idAlumno."' and idInstructor='".$idInstructor."' and fechaFinal IS NULL;";
     $result =  mysqli_query($conexion,$query);
     if(!$result){

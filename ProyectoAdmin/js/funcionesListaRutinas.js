@@ -42,9 +42,9 @@ function interpretarJson(){
         var arrDias = JSON.parse(json)['dias'];
         for(var i = 0; i < arrDias.length; i++){
             crearActividad(idTabla,'Dia ' + dia);
-            var rutina = arrDias[i];
-            for(var j = 0; j < rutina.length; j++){
-                var ejercicioD = rutina[j];
+            var rutina = arrDias[i];//objeto dicionari
+            for(var j = 0; j < rutina['ejercicios'].length; j++){
+                var ejercicioD = rutina['ejercicios'][j];
                 if(ejercicioD.constructor === {}.constructor){
                     var musculo = ejercicioD['musculo'];
                     var ejercicio = ejercicioD['ejercicio'];
@@ -618,17 +618,25 @@ function crearEjercicio(idTabla,indice,musculo,ejercicio,series,repeticiones,ava
 function obtenerJson(idTabla){
     var tabla = document.getElementById(idTabla);
     var txt = document.getElementById("test");
-    var json = '{ "dias": [ ';
-    var banderaAux = 0;
+    
+    var dias = '';
+    var ejercicios = '';
+    var banderaAux = true;
+    var nombreEjercicio
     for(var i = celdaInicial; i < tabla.rows.length; i++){
         var renglon = tabla.rows[i];
         if(renglon.className == "escondido" || renglon.className == "mostrando"){//entonces es un nuevo dia
-            if(banderaAux !== 0){
-                json += '}],[{';
+            if(banderaAux){
+                nombreEjercicio = renglon.cells[0].innerHTML;
+                banderaAux = false;
             }else{
-                json += '[{';
-                banderaAux = 1;
+                if(dias !== ''){
+                    dias += ',';
+                }
+                dias += '{ "nombre" : "' + nombreEjercicio +'" , "ejercicios" : [ ' + ejercicios + '] }'; 
+                nombreEjercicio = renglon.cells[0].innerHTML;
             }
+            
             i++;//saltarnos el renglon del boton
         }else if(renglon.className === "ejercicio" || renglon.className === "ejercicioEscondido"){
             
@@ -638,19 +646,20 @@ function obtenerJson(idTabla){
             var repeticiones = renglon.cells[3].innerHTML;
             var estado = renglon.cells[4].innerHTML;
             estado = estado == "NO" ? 0 : 1;
-            
-            json += '"musculo": "'+musculo+'",';
-            json += '"ejercicio": "'+ejercicio+'",';
-            json += '"series": "'+series+'",';
-            json += '"repeticiones": "'+repeticiones+'",';
-            json += '"avance": "'+estado+'"';
-            json += '},{'
+            if(ejercicios !== ''){
+                ejercicios += ',';
+            }
+            ejercicios += '{'
+            ejercicios += '"musculo": "'+musculo+'",';
+            ejercicios += '"ejercicio": "'+ejercicio+'",';
+            ejercicios += '"series": "'+series+'",';
+            ejercicios += '"repeticiones": "'+repeticiones+'",';
+            ejercicios += '"avance": "'+estado+'"';
+            ejercicios += '}';
         }
     }
-    json +='}]]}';
-    json = json.split(",{}").join("");
-    
-    
+    dias += ',{ "nombre" : "' + nombreEjercicio +'" , "ejercicios" : [ ' + ejercicios + '] }'; 
+    var json = '{ "dias": [ ' + dias + '] }';   
     document.getElementById("test").innerHTML = json;
     var idInstructor = document.getElementById("idInstructor").value;
     var idAlumno = document.getElementById("idAlumno").value;

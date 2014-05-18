@@ -8,5 +8,8 @@ if(sesionIniciada($conexion)){//es un instructor
     $json['dias'] = array_reverse($json['dias']);
     $json = json_encode($json);
     actualizaJson($conexion, $json, $_GET["idAlumno"], $_GET["idInstructor"]);
+}else if(isset($_POST['idAlumno'],$_POST['contrasena'],$_POST['json'])){
+    actualizaJson($conexion, $_POST['json'], $_POST["idAlumno"], NULL);
+}else {
+   echo '{"success" : 0}';
 }
-
