@@ -12,26 +12,12 @@
     <head>
         <meta charset="UTF-8">
         <title>Lista alumnos</title>
-        <script type="text/javascript">
-            function modificar(obj){
-                var matricula = obj.getElementsByTagName("input")[0].value;
-                window.location.href="rutina_actual.php?alumno="+matricula;
-            }
-            
-            function eliminar(obj){
-                var r = confirm("¿Estas seguro de borrar a este alumno?");
-                if(r == true){
-                    var row = document.getElementById(obj);
-                    row.parentNode.removeChild(row);
-                }
-            }
-        </script>
+        <script src="js/funcionesListaAlumnos.js" type="text/javascript"></script>
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
         <link href="css/tabla.css" rel="stylesheet" type="text/css"/>
         <link href="css/inputs.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        
         <div class="cuerpo" align="center">
                 <h1>Bienvenido <?= $_SESSION['usuario']?></h1>
                 <h1>Alumnos </h1>

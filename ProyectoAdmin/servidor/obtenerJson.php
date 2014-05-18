@@ -2,6 +2,11 @@
 include_once '../includes/basededatos.php';
 include_once '../includes/funciones.php';
 include_once '../includes/funcionesAlumno.php';
+
+header('Cache-Control: no-cache, must-revalidate');
+header('Expires: Mon, 01 Jan 1996 00:00:00 GMT');
+header('Content-type: application/json');
+
 session_start();
 if(sesionIniciada($conexion)){// si es instructor
    echo(rutinasDeAlumno($conexion, $_GET['idAlumno'], $_SESSION['usuario']));

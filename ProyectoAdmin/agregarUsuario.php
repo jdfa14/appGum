@@ -1,17 +1,7 @@
 <?php
-
 session_start();
-
 ?>
-
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-
-
 <html>
     <head>
         <meta charset="UTF-8">
@@ -65,7 +55,7 @@ and open the template in the editor.
                             <option value="Femenino">Femenino</option>
                         </select>
                     </div>
-                    <div class="campoEntrada"> <input class="botonSumbmit" type="submit"/> </div>
+                    <div class="campoEntrada"> <input class="botonSumbmit" type="submit" value="Agregar Usuario"/> </div>
                 </form>
             </div>
         </div>

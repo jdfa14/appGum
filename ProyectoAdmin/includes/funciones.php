@@ -1,7 +1,7 @@
 <?php
 function agregarUsuario($conexion,$matricula,$instructor,$nombre,$apellido,$correo,$peso,$nacimiento,$sexo,$contrasena){
     mysqli_autocommit($conexion, FALSE);
-    $query1 = "SELECT * FROM alumno WHERE matricula = '".$matricula."';";
+    $query1 = "SELECT * FROM alumno WHERE idAlumno = '".$matricula."';";
     $result1 =  mysqli_query($conexion,$query1);
     if(mysqli_num_rows($result1) <= 0){//no existe dicho alumno
         $query2 = "INSERT INTO alumno (idAlumno, nombre, apellido, correo, peso, nacimiento, sexo, contrasena) "
@@ -87,8 +87,7 @@ function alumnosDeInstructor($conexion,$instructor){
     $query = "SELECT a.*, i.fechaFinal FROM alumno as a, alumnoinstructor as i WHERE a.idAlumno = i.idAlumno AND i.idAlumno IN ( SELECT idAlumno FROM member JOIN alumnoinstructor ON (username = idInstructor) WHERE username = '".$instructor."');";
     $result =  mysqli_query($conexion,$query);
     if(!$result){
-        $row = mysql_fetch_assoc($result);
-        print('No se pudo obtener alumnos. Query :' . $query . $row['nombre']);
+        print('No se pudo obtener alumnos. Query :' . $query );
         print('Error :' . mysql_error());
         return 0;
     }else{
@@ -101,12 +100,11 @@ function datosAlumno($conexion, $idAlumno){
     $query = "SELECT * FROM alumno WHERE idAlumno = '".$idAlumno."';";
     $result =  mysqli_query($conexion,$query);
     if(!$result){
-        $row = mysql_fetch_assoc($result);
-        print('No se pudo obtener al alumno. Query :' . $query . $row['nombre']);
+        print('No se pudo obtener al alumno. Query :' . $query );
         print('Error :' . mysql_error());
         return 0;
     }else{
-        return $result;
+        return mysqli_fetch_assoc($result);
     }
 }
 
@@ -161,6 +159,17 @@ function actualizaJson($conexion,$json,$idAlumno,$idInstructor){
         print('Error :' . mysql_error());
         return 0;
     }
-    echo($query);
+    return 1;
+}
+
+function eliminarAlumno($conexion,$idAlumno,$idInstructor){
+    $fecha = date("Y-m-d");
+    $query="UPDATE alumnoinstructor SET fechaFinal='".$fecha."' WHERE idAlumno='".$idAlumno."' and`idInstructor`='".$idInstructor."' AND fechaFinal IS NULL;";
+    $result =  mysqli_query($conexion,$query);
+    if(!$result){
+        print('No se pudo terminar el ciclo del alumno. Query :' . $query);
+        print('Error :' . mysql_error());
+        return 0;
+    }
     return 1;
 }

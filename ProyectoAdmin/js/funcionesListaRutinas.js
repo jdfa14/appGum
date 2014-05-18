@@ -90,6 +90,7 @@ function agregaActividad(idTabla){
     forma.appendChild(botonS);
     forma.appendChild(botonC);
     td.appendChild(forma);
+    td.setAttribute("colspan",cantidadCeldas)
     tr.appendChild(td);
 }
 function guardarActividad(idTabla){
@@ -132,7 +133,7 @@ function crearActividad(idTabla,nombre){
     boton.value = "Agregar Ejercicio";
     botonB.value = "Borrar Actividad";
     boton.setAttribute("onClick","agregarEjercicio(this,'"+idTabla+"')");
-    botonB.setAttribute("onClick","borrarActivdad(this,'"+idTabla+"')");
+    botonB.setAttribute("onClick","borrarActividad(this,'"+idTabla+"')");
 
     td.className = "celdaInteractiva";
     td.innerHTML = nombre;
@@ -199,8 +200,12 @@ function reset(idTabla){
 }
 
 function agregarEjercicio(celda,idTabla){
-    var tabla = document.getElementById(idTabla);
     var indice = celda.parentNode.parentNode.rowIndex + 2;
+    ejercicioEditable(idTabla,indice,"","",0,0,false);
+}
+
+function ejercicioEditable(idTabla,indice,musculo,ejercicio,series,repeticiones,completado){
+    var tabla = document.getElementById(idTabla);
     var trNuevo = tabla.insertRow(indice);
     
     var td1 = trNuevo.insertCell();
@@ -248,10 +253,10 @@ function agregarEjercicio(celda,idTabla){
     botonG.type = "button";
     botonC.type = "button";
     botonG.value = "Guardar";
-    botonC.value = "Cancelar";
+    botonC.value = "Eliminar";
     input3.name = "completado";
     botonG.setAttribute("onClick","guardarEjercicio(this,'"+idTabla+"')");
-    botonC.setAttribute("onClick","cancelarEjercicio(this)");
+    botonC.setAttribute("onClick","cancelarEjercicio(this,'"+idTabla+"')");
     trNuevo.className = "escondeme";
     
     select.appendChild(option1);
@@ -271,14 +276,41 @@ function agregarEjercicio(celda,idTabla){
     td5.appendChild(input3);
     td6.appendChild(botonG);
     td6.appendChild(botonC);
+    
+    input1.value = series;
+    input2.value = repeticiones;
+    input3.checked = completado;
+    
+    for(var i = 0; i < select.options.length; i++){
+        if(select.options[i].value === musculo){
+            select.selectedIndex = i;
+            break;
+        }
+    }
+    poblar(select);
+    for(var i = 0; i < select2.options.length; i++){
+        if(select2.options[i].value === ejercicio){
+            select2.selectedIndex = i;
+            break;
+        }
+    }
 }
 
-function cancelarEjercicio(celda){
+function cancelarEjercicio(celda,idTabla){
     celda.parentNode.parentNode.remove(celda.parentNode);
+    obtenerJson(idTabla);
 }
 
-function editarEjercicio(celda){
-    var renglon = celda.parentNode;
+function editarEjercicio(celda,idTabla){
+    var renglon = celda.parentNode.parentNode;
+    var indice = renglon.rowIndex;
+    renglon.parentNode.removeChild(renglon);
+    var musculo = renglon.cells[0].innerHTML;
+    var ejercicio = renglon.cells[1].innerHTML;
+    var series = renglon.cells[2].innerHTML;
+    var repeticiones = renglon.cells[3].innerHTML;
+    var completado = renglon.cells[4].innerHTML === "SI" ? true : false;
+    ejercicioEditable(idTabla,indice,musculo,ejercicio,series,repeticiones,completado);
 }
 function poblar(celda){
     var renglon = celda.parentNode.parentNode;
@@ -569,11 +601,11 @@ function crearEjercicio(idTabla,indice,musculo,ejercicio,series,repeticiones,ava
     td2.innerHTML = ejercicio;
     td3.innerHTML = series;
     td4.innerHTML = repeticiones;
-    td5.innerHTML = avance ? "SI" : "NO";
+    td5.innerHTML = avance === 1 ? "SI" : "NO";
     
     boton.type = "button";
     boton.value = "editar";
-    boton.setAttribute("onClick","editarEjercicio(this)");
+    boton.setAttribute("onClick","editarEjercicio(this,'"+idTabla+"')");
     td2.setAttribute("colspan",2);
     td6.appendChild(boton);
     if(oculto){
@@ -623,4 +655,18 @@ function obtenerJson(idTabla){
     var idInstructor = document.getElementById("idInstructor").value;
     var idAlumno = document.getElementById("idAlumno").value;
     guardarJson(idAlumno,idInstructor,json);
+}
+
+function borrarActividad(celda, idTabla){
+    var r = confirm("¿Estas seguro de borrar el dia entero?");
+    if(r){
+        var tabla = document.getElementById(idTabla);
+        var indice = celda.parentNode.parentNode.rowIndex;
+        var renglon = tabla.rows[indice];
+        do{
+            renglon.parentNode.removeChild(renglon);
+            renglon = tabla.rows[indice];
+        }while(renglon.className !== "escondido" && renglon.className !== "mostrando"); 
+        obtenerJson(idTabla);
+    }
 }
