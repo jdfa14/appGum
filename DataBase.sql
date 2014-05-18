@@ -4,13 +4,20 @@ CREATE DATABASE appGym;
 USE appGym;
 
 DROP USER 'usuario'@'localhost';
+DROP USER 'admin'@'localhost';
+
 CREATE USER 'usuario'@'localhost' IDENTIFIED BY 'paydelimon';
 GRANT SELECT, DELETE, INSERT, UPDATE 
 	ON appGym.* TO 'usuario'@'localhost';
 
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin';
+GRANT SELECT, DELETE, INSERT, UPDATE 
+	ON appGym.* TO 'admin'@'localhost';
+
+
 
 CREATE TABLE member (
-    username VARCHAR(30) NOT NULL UNIQUE,
+    username VARCHAR(10) NOT NULL UNIQUE,
     email VARCHAR(50) NOT NULL UNIQUE,
     password CHAR(128) NOT NULL,
     PRIMARY KEY (username)
@@ -22,10 +29,8 @@ CREATE TABLE login_attempts (
     time VARCHAR(30) NOT NULL
 );
 
-
 create table alumno(
-	matricula varchar(10) NOT NULL,
-	instructor varchar(30),
+	idAlumno varchar(10) NOT NULL,
 	nombre varchar(45) NOT NULL,
 	apellido varchar(45) NOT NULL,
 	correo varchar(25) DEFAULT NULL,
@@ -34,20 +39,18 @@ create table alumno(
 	rutinaJsonActual int,
 	sexo varchar(10) NOT NULL,
 	contrasena varchar(45) NOT NULL,
-	foreign key (instructor) references member(username),
-	PRIMARY KEY (matricula)
+	PRIMARY KEY (idAlumno)
 );
 
-
-create table rutina_json (
-	numRutina int not null auto_increment primary key,
-	alumno varchar(10),
-	dia0 date,
-	pesoInicial double,
-	pesoFinal double,
-	
+CREATE TABLE alumnoinstructor (
+	idAlumno VARCHAR(10) NOT NULL,
+	idInstructor VARCHAR(10) NOT NULL,
+	fechaRegistro DATE NOT NULL,
+	fechaFinal DATE,
 	definicion text,
-	avance text
+	PRIMARY KEY (idAlumno, idInstructor,fechaRegistro),
+	foreign key (idAlumno) references alumno(idAlumno),
+	foreign key (idInstructor) references member(username)
 );
 
 create table rutina (
@@ -59,11 +62,6 @@ create table rutina (
 );
 
 -- select 'addfk';
-
-alter table alumno add
-foreign key(rutinaJsonActual) references rutina_json(numRutina);
-alter table rutina_json add
-foreign key(alumno) references alumno(matricula);
 	
 -- select 'ejercicio';
 
