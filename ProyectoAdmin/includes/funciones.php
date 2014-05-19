@@ -16,9 +16,7 @@ function agregarUsuario($conexion,$matricula,$instructor,$nombre,$apellido,$corr
             . "'".$contrasena."');";
         $result2 =  mysqli_query($conexion,$query2);
         if(!$result2){
-            print('No se pudo insertar los datos, query :' . $query2);
-            print('Error :' . mysql_error());
-            die('inserta Alumno');
+            mysqli_rollback($conexion);
             mysqli_autocommit($conexion, TRUE);
             return 0;
         }
@@ -30,18 +28,25 @@ function agregarUsuario($conexion,$matricula,$instructor,$nombre,$apellido,$corr
                 . "'".$date."');";
         $result3 =  mysqli_query($conexion,$query3);
         if(!$result3){
-            print('No se pudo insertar los datos, query :' . $query3);
-            print('Error :' . mysql_error());
-            die('relacion');
+            mysqli_rollback($conexion);
+            mysqli_autocommit($conexion, TRUE);
+            return 0;
+        }        
+    }else{
+        $date = date("Y-m-d");
+        $query3 = "INSERT INTO alumnoinstructor (idAlumno, idInstructor, fechaRegistro) "
+                . "VALUES ("
+                . "'".$matricula."', "
+                . "'".$instructor."', "
+                . "'".$date."');";
+        $result3 =  mysqli_query($conexion,$query3);
+        if(!$result3){
+            mysqli_rollback($conexion);
             mysqli_autocommit($conexion, TRUE);
             return 0;
         }
-        mysqli_commit($conexion);
-        
-    }else{
-        mysqli_autocommit($conexion, TRUE);
-        return 0;
     }
+    mysqli_commit($conexion);
     mysqli_autocommit($conexion, TRUE);
     return 1;
 }

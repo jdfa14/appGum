@@ -1,5 +1,4 @@
 <?php
-
 function iniciarSesionAlumno($conexion,$usuario,$contrasena){
     $query = "SELECT * FROM alumno WHERE idAlumno= '".$usuario."';";
     $result =  mysqli_query($conexion,$query);
