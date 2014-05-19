@@ -12,7 +12,7 @@
 #import "ILTMusculoTableViewCell.h"
 
 @interface ILTMasterViewController () {
-    NSMutableArray *_avance;
+    NSMutableArray *avance;
     NSArray *json;
    /* NSMutableArray *myObject;
     // A dictionary object
@@ -190,13 +190,13 @@
         NSDictionary *jsonData = [JsonManager jsonHandler:url parametros:post];
         _definicion = jsonData[@"dias"];
         
-        _avance = [[NSMutableArray alloc] init];
+        avance = [[NSMutableArray alloc] init];
         for(NSArray *dia in _definicion) {
             NSMutableArray *avanceDia = [[NSMutableArray alloc] init];
             for(NSDictionary *ejercicio in dia) {
                 [avanceDia addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:@NO, @"completado", @"", @"comentarios", nil]];
             }
-            [_avance addObject:avanceDia];
+            [avance addObject:avanceDia];
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -253,13 +253,19 @@
     }*/
     NSLog(@"%ld",(long)indexPath.section);
     NSLog(@"%ld",(long)indexPath.row);
-
     NSDictionary *object = [_definicion[indexPath.section] objectForKey:@"ejercicios"][indexPath.row];
     cell.musculoLabel.text = object[@"ejercicio"];
     cell.seriesL.text = [NSString stringWithFormat:@"%@", object[@"series"]];
     cell.repeticionesL.text = [NSString stringWithFormat:@"%@", object[@"repeticiones"]];
     cell.indexPath = indexPath;
-    cell.buttonIsOn = [_avance[indexPath.section][indexPath.row][@"completado"] boolValue];
+    NSString *avance1 = [object objectForKey:@"avance"];
+    
+    if([avance1 isEqualToString:@"1"]){
+        cell.buttonIsOn = true;
+    }else{
+        cell.buttonIsOn = false;
+    }
+    
     cell.papa = self;
     [cell setDelegado:self];
     [cell updateImage];
@@ -273,10 +279,6 @@
     cell.musculoLabel.text = text;*/
     return cell;
    
-}
-
--(void) updateDia: (NSInteger) dia ejercicio: (NSInteger) ejercicio completado: (BOOL) completado {
-    _avance[dia][ejercicio][@"avance"] = [NSNumber numberWithBool:completado];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -326,7 +328,7 @@ accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        [[segue destinationViewController] setAvance:_avance[indexPath.section][indexPath.row]];
+        [[segue destinationViewController] setAvance:avance[indexPath.section][indexPath.row]];
     }
 }
 
