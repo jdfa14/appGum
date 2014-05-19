@@ -66,10 +66,11 @@ create table rutina (
 -- select 'ejercicio';
 
 create table ejercicio(
-	idEjercicio int not null primary key,
 	nombre varchar(30) not null,
-	descripcion varchar(30) not null,
-	musculo varchar(30) not null
+	descripcion varchar(130) not null,
+	musculo varchar(30) not null,
+	archivo varchar(65) not null,
+	primary key(nombre, musculo)
 );
 
 -- select 'rutina_ejercicio';
