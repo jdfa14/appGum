@@ -12,7 +12,6 @@
 #import "ILTMusculoTableViewCell.h"
 
 @interface ILTMasterViewController () {
-    NSMutableArray *_definicion;
     NSMutableArray *_avance;
     NSArray *json;
    /* NSMutableArray *myObject;
@@ -38,7 +37,6 @@
     [self fetchReports];
     /*UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
      self.navigationItem.rightBarButtonItem = addButton;*/
-   NSMutableArray *musculo = [[NSMutableArray alloc] initWithObjects: @"Pecho", @"Bicep", @"Espalda", @"Hombro", @"Tricep", @"Trapecio", nil];
    // NSMutableArray *email = [[NSMutableArray alloc] initWithObjects:@"ivan@gmail.com", @"tania@gmail.com", @"aza@gmail.com", @"david@gmail.com", nil];
     
    /* _definicion =
@@ -184,20 +182,13 @@
         
         NSUserDefaults *fetchDefaults = [NSUserDefaults standardUserDefaults];
         NSString *user = [fetchDefaults objectForKey:@"kUser"];
+        NSString *pass = [fetchDefaults objectForKey:@"kPassword"];
         
-        NSLog(@"user %@", user);
-
-        NSData* data =
-        [NSData dataWithContentsOfURL:
-         [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost/get_rutina.php?matricula=%@", user]
-          ]];
-        
-        NSError* error;
-        NSDictionary *dict =
-        [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers | NSJSONReadingAllowFragments error:&error];
-        NSLog(@"%@", dict);
-        _definicion = dict[@"dias"];
-        NSLog(@"%@", _definicion);
+        NSString *post =[[NSString alloc] initWithFormat:@"idAlumno=%@&contrasena=%@",user,pass];
+        NSString *url = @"http://localhost/~ivandiaz/servidor/obtenerJson.php";
+        ILTJsonManager *JsonManager = [[ILTJsonManager alloc] init];
+        NSDictionary *jsonData = [JsonManager jsonHandler:url parametros:post];
+        _definicion = jsonData[@"dias"];
         
         _avance = [[NSMutableArray alloc] init];
         for(NSArray *dia in _definicion) {
@@ -260,17 +251,21 @@
     /*if (cell == nil) {
         cell = [[ILTMusculoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }*/
-   NSDictionary *object = _definicion[indexPath.section][indexPath.row];
+    NSLog(@"%ld",(long)indexPath.section);
+    NSLog(@"%ld",(long)indexPath.row);
+
+    NSDictionary *object = [_definicion[indexPath.section] objectForKey:@"ejercicios"][indexPath.row];
     cell.musculoLabel.text = object[@"ejercicio"];
     cell.seriesL.text = [NSString stringWithFormat:@"%@", object[@"series"]];
     cell.repeticionesL.text = [NSString stringWithFormat:@"%@", object[@"repeticiones"]];
     
+    
     cell.buttonIsOn = [_avance[indexPath.section][indexPath.row][@"completado"] boolValue];
+  
     cell.section = indexPath.section;
     cell.row = indexPath.row;
     cell.papa = self;
-    
-
+    [cell setDelegado:self];
     [cell updateImage];
    /* NSDictionary *tmpDict = [myObject objectAtIndex:indexPath.row];
     

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ILTMasterViewController.h"
+#import "ILTJsonManager.h"
 
 @interface ILTMusculoTableViewCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *musculoLabel;
@@ -16,7 +17,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *seriesL;
 @property (strong, nonatomic) IBOutlet UILabel *repeticionesL;
 @property (strong, nonatomic) IBOutlet UIButton *checkB;
-
+@property (strong, nonatomic) id delegado;
 @property (nonatomic) NSInteger section;
 @property (nonatomic) NSInteger row;
 

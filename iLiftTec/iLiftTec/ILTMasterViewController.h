@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ILTJsonManager.h"
 
 @interface ILTMasterViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic) UITableViewCellAccessoryType accessoryType;
+@property (strong, nonatomic) NSMutableArray *definicion;
+
 
 
 -(void) updateDia: (NSInteger) dia ejercicio: (NSInteger) ejercicio completado: (BOOL) completad;

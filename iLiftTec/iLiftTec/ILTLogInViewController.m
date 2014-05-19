@@ -7,8 +7,9 @@
 //
 
 #import "ILTLogInViewController.h"
-#import "SBJson.h"
+#import "ILTJsonManager.h"
 
+#define link http://localhost/~ivandiaz;
 
 @interface ILTLogInViewController ()
 
@@ -100,63 +101,22 @@
     }
 
 -(BOOL) intentaLoginUser: (NSString *) user password: (NSString *) password {
-    
-    @try {
-        
        
-            NSString *post =[[NSString alloc] initWithFormat:@"nombre=%@&contrasena=%@",user,password];
-            NSLog(@"PostData: %@",post);
-            
-            
-            NSURL *url=[NSURL URLWithString:@"http://localhost/servidor/alumnoInicioSesion.php"];
-            
-            NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-            
-            NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
-            
-            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-            [request setURL:url];
-            [request setHTTPMethod:@"POST"];
-            [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-            [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-            [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-            [request setHTTPBody:postData];
-            
-            //[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
-            
-            NSError *error = [[NSError alloc] init];
-            NSHTTPURLResponse *response = nil;
-            NSData *urlData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-            
-            NSLog(@"Response code: %d", [response statusCode]);
-            if ([response statusCode] >=200 && [response statusCode] <300)
-            {
-                NSString *responseData = [[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
-                NSLog(@"Response ==> %@", responseData);
-                
-                SBJsonParser *jsonParser = [SBJsonParser new];
-                NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
-                NSLog(@"%@",jsonData);
-                NSInteger success = [(NSNumber *) [jsonData objectForKey:@"success"] integerValue];
-                NSLog(@"%d",success);
-                if(success == 1)
-                {
-                    return TRUE;
-                } else {
-                    
-                    NSString *error_msg = (NSString *) [jsonData objectForKey:@"error_message"];
-                    [self alertStatus:error_msg :@"Login Failed!"];
-                }
-                
-            } else {
-                if (error) NSLog(@"Error: %@", error);
-                [self alertStatus:@"Connection Failed" :@"Login Failed!"];
-            }
-        }
+    NSString *post =[[NSString alloc] initWithFormat:@"nombre=%@&contrasena=%@",user,password];
+    NSString *url = @"http://localhost/~ivandiaz/servidor/alumnoInicioSesion.php";
+    ILTJsonManager *JsonManager = [[ILTJsonManager alloc] init];
+    NSDictionary *jsonData = [JsonManager jsonHandler:url parametros:post];
     
-    @catch (NSException * e) {
-        NSLog(@"Exception: %@", e);
-        [self alertStatus:@"Login Failed." :@"Login Failed!"];
+    if(jsonData){
+        NSInteger success = [(NSNumber *) [jsonData objectForKey:@"success"] integerValue];
+        
+        if(success == 1)
+        {
+            return TRUE;
+        } else {
+            NSString *error_msg = (NSString *) [jsonData objectForKey:@"error_message"];
+            [self alertStatus:error_msg :@"Login Failed!"];
+        }
     }
     
     return false;

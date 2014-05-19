@@ -38,6 +38,7 @@
 		C479A51B18DFC71400E049C9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C479A4FA18DFC71400E049C9 /* UIKit.framework */; };
 		C479A52318DFC71400E049C9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C479A52118DFC71400E049C9 /* InfoPlist.strings */; };
 		C479A52518DFC71400E049C9 /* iLiftTecTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C479A52418DFC71400E049C9 /* iLiftTecTests.m */; };
+		C4D85445192958F100FF0C75 /* ILTJsonManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D85444192958F100FF0C75 /* ILTJsonManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,8 @@
 		C479A52018DFC71400E049C9 /* iLiftTecTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iLiftTecTests-Info.plist"; sourceTree = "<group>"; };
 		C479A52218DFC71400E049C9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C479A52418DFC71400E049C9 /* iLiftTecTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iLiftTecTests.m; sourceTree = "<group>"; };
+		C4D85443192958F100FF0C75 /* ILTJsonManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILTJsonManager.h; sourceTree = "<group>"; };
+		C4D85444192958F100FF0C75 /* ILTJsonManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILTJsonManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +203,8 @@
 				C479A50818DFC71400E049C9 /* Main.storyboard */,
 				C44120E318EE47EF00DB365F /* ILTLogInViewController.h */,
 				C44120E418EE47EF00DB365F /* ILTLogInViewController.m */,
+				C4D85443192958F100FF0C75 /* ILTJsonManager.h */,
+				C4D85444192958F100FF0C75 /* ILTJsonManager.m */,
 				C4292E0C18E4C99A0048B63E /* checkbox-checked.png */,
 				C4292E0D18E4C99A0048B63E /* checkbox-unchecked.png */,
 				C408C1D718E4C49A00C79C99 /* ILTMusculoTableViewCell.h */,
@@ -356,6 +361,7 @@
 				C441212D18EE872E00DB365F /* SBJsonStreamWriterState.m in Sources */,
 				C441212918EE872E00DB365F /* SBJsonStreamParserAdapter.m in Sources */,
 				C441212C18EE872E00DB365F /* SBJsonStreamWriterAccumulator.m in Sources */,
+				C4D85445192958F100FF0C75 /* ILTJsonManager.m in Sources */,
 				C441213018EE872E00DB365F /* SBJsonWriter.m in Sources */,
 				C441212A18EE872E00DB365F /* SBJsonStreamParserState.m in Sources */,
 				C479A51018DFC71400E049C9 /* ILTDetailViewController.m in Sources */,

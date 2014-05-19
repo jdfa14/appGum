@@ -12,5 +12,7 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *usuarioTF;
 @property (strong, nonatomic) IBOutlet UITextField *contrasenaTF;
+//@property (strong, nonatomic) NSString "http://localhost/~ivandiaz";
+
 - (IBAction)loginButton:(id)sender;
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "ILTMusculoTableViewCell.h"
+#import "ILTJsonManager.h"
+#import "ILTMasterViewController.h"
 
 @implementation ILTMusculoTableViewCell
 
@@ -34,9 +36,24 @@
 - (IBAction)checkButton:(id)sender {
     
     self.buttonIsOn = !self.buttonIsOn;
+    NSMutableArray *auxDic = [_delegado definicion];
+    NSUserDefaults *fetchDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *user = [fetchDefaults objectForKey:@"kUser"];
+    NSString *pass = [fetchDefaults objectForKey:@"kPassword"];
+    
+    NSString *post =[[NSString alloc] initWithFormat:@"idAlumno=%@&contrasena=%@",user,pass];
+    NSString *url = @"http://localhost/~ivandiaz/servidor/obtenerJson.php";
+    ILTJsonManager *JsonManager = [[ILTJsonManager alloc] init];
+    NSDictionary *jsonData = [JsonManager jsonHandler:url parametros:post];
+    NSMutableArray *_definicion;
+    _definicion = jsonData[@"dias"];
+    
+    
     
     [self updateImage];
     [self.papa updateDia: self.section ejercicio: self.row completado: self.buttonIsOn];
+    
+    
 }
 
 -(void) updateImage{
