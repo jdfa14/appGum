@@ -4,8 +4,7 @@
     session_start();
     if(isset($_GET['alumno'])){
         $matricula = $_GET['alumno'];
-        $result = datosAlumno($conexion, $matricula);
-        $row = mysqli_fetch_assoc($result);
+        $row = datosAlumno($conexion, $matricula);
         $nombre = $row["nombre"] . " " . $row["apellido"];
     }else{
         $matricula = "";

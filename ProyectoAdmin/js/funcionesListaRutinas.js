@@ -20,7 +20,8 @@ function guardarJson(idAlumno,idInstructor,json) {
         param += "idAlumno="+idAlumno + "&";
         param += "idInstructor="+idInstructor + "&";
         param += "json="+json;
-        receiveReq.open("GET", 'servidor/actualizarRutina.php?' + param , true);
+        var path = 'servidor/actualizarRutina.php?' + param ;
+        receiveReq.open("GET",path , true);
         receiveReq.send(null);
     }
 }
@@ -41,8 +42,8 @@ function interpretarJson(){
         var json = receiveReq.responseText;
         var arrDias = JSON.parse(json)['dias'];
         for(var i = 0; i < arrDias.length; i++){
-            crearActividad(idTabla,'Dia ' + dia);
             var rutina = arrDias[i];//objeto dicionari
+            crearActividad(idTabla,rutina['nombre']);
             for(var j = 0; j < rutina['ejercicios'].length; j++){
                 var ejercicioD = rutina['ejercicios'][j];
                 if(ejercicioD.constructor === {}.constructor){
@@ -54,7 +55,9 @@ function interpretarJson(){
                     crearEjercicio(idTabla,celdaInicial + 3,musculo,ejercicio,series,repeticiones,avance,true);
                 }
             }
-            dia ++;
+            if(rutina['nombre'].substring(0,3) === "Dia"){
+                dia++;
+            }
         }
     }
 }
@@ -99,8 +102,10 @@ function guardarActividad(idTabla){
     var nombre = forma.getElementsByTagName("input")[0].value;
     crearActividad(idTabla,nombre);
     cancelarActividad(idTabla);
-    obtenerJson(idTabla);
-    dia = dia + 1;
+    //obtenerJson(idTabla);
+    if(nombre.substring(0,3) === "Dia"){
+        dia ++;
+    }
 }
 
 function crearActividad(idTabla,nombre){
@@ -601,7 +606,7 @@ function crearEjercicio(idTabla,indice,musculo,ejercicio,series,repeticiones,ava
     td2.innerHTML = ejercicio;
     td3.innerHTML = series;
     td4.innerHTML = repeticiones;
-    td5.innerHTML = avance === 1 ? "SI" : "NO";
+    td5.innerHTML = avance === true ? "SI" : "NO";
     
     boton.type = "button";
     boton.value = "editar";
@@ -634,6 +639,7 @@ function obtenerJson(idTabla){
                     dias += ',';
                 }
                 dias += '{ "nombre" : "' + nombreEjercicio +'" , "ejercicios" : [ ' + ejercicios + '] }'; 
+                ejercicios = '';
                 nombreEjercicio = renglon.cells[0].innerHTML;
             }
             
@@ -658,7 +664,10 @@ function obtenerJson(idTabla){
             ejercicios += '}';
         }
     }
-    dias += ',{ "nombre" : "' + nombreEjercicio +'" , "ejercicios" : [ ' + ejercicios + '] }'; 
+    if(dias !== ''){
+        dias += ',';
+    }
+    dias += '{ "nombre" : "' + nombreEjercicio +'" , "ejercicios" : [ ' + ejercicios + '] }'; 
     var json = '{ "dias": [ ' + dias + '] }';   
     document.getElementById("test").innerHTML = json;
     var idInstructor = document.getElementById("idInstructor").value;
@@ -678,4 +687,5 @@ function borrarActividad(celda, idTabla){
         }while(renglon.className !== "escondido" && renglon.className !== "mostrando"); 
         obtenerJson(idTabla);
     }
+    
 }
