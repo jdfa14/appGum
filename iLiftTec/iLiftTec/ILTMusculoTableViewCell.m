@@ -36,22 +36,36 @@
 - (IBAction)checkButton:(id)sender {
     
     self.buttonIsOn = !self.buttonIsOn;
-    NSMutableArray *auxDic = [_delegado definicion];
-    NSUserDefaults *fetchDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *user = [fetchDefaults objectForKey:@"kUser"];
-    NSString *pass = [fetchDefaults objectForKey:@"kPassword"];
+     
+    [[[_delegado definicion][_indexPath.section] objectForKey:@"ejercicios"][_indexPath.row] setValue:@"1" forKey:@"avance"];
     
-    NSString *post =[[NSString alloc] initWithFormat:@"idAlumno=%@&contrasena=%@",user,pass];
-    NSString *url = @"http://localhost/~ivandiaz/servidor/obtenerJson.php";
-    ILTJsonManager *JsonManager = [[ILTJsonManager alloc] init];
-    NSDictionary *jsonData = [JsonManager jsonHandler:url parametros:post];
-    NSMutableArray *_definicion;
-    _definicion = jsonData[@"dias"];
+    NSDictionary *nueva = [[NSDictionary alloc] initWithObjectsAndKeys:[_delegado definicion], @"dias", nil];
     
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:nueva
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
     
+    if (! jsonData) {
+        NSLog(@"Got an error: %@", error);
+    } else {
+        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+        NSUserDefaults *fetchDefaults = [NSUserDefaults standardUserDefaults];
+        NSString *user = [fetchDefaults objectForKey:@"kUser"];
+        NSString *pass = [fetchDefaults objectForKey:@"kPassword"];
+        
+        NSString *post =[[NSString alloc] initWithFormat:@"idAlumno=%@&contrasena=%@&json=%@", user, pass, jsonString];
+        NSString *url = @"http://localhost/~ivandiaz/servidor/actualizarRutina.php";
+        ILTJsonManager *JsonManager = [[ILTJsonManager alloc] init];
+        NSDictionary *jsonData1 = [JsonManager jsonHandler:url parametros:post];
+        NSLog(@"Ivanobitch");
+    }
+    
+
     
     [self updateImage];
-    [self.papa updateDia: self.section ejercicio: self.row completado: self.buttonIsOn];
+    //[self.papa updateDia: self.section ejercicio: self.row completado: self.buttonIsOn];
     
     
 }

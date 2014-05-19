@@ -102,7 +102,7 @@
 
 -(BOOL) intentaLoginUser: (NSString *) user password: (NSString *) password {
        
-    NSString *post =[[NSString alloc] initWithFormat:@"nombre=%@&contrasena=%@",user,password];
+    NSString *post =[[NSString alloc] initWithFormat:@"idAlumno=%@&contrasena=%@",user,password];
     NSString *url = @"http://localhost/~ivandiaz/servidor/alumnoInicioSesion.php";
     ILTJsonManager *JsonManager = [[ILTJsonManager alloc] init];
     NSDictionary *jsonData = [JsonManager jsonHandler:url parametros:post];

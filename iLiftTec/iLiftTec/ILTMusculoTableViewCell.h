@@ -18,8 +18,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *repeticionesL;
 @property (strong, nonatomic) IBOutlet UIButton *checkB;
 @property (strong, nonatomic) id delegado;
-@property (nonatomic) NSInteger section;
-@property (nonatomic) NSInteger row;
+@property (nonatomic) NSIndexPath *indexPath;
 
 @property (strong, nonatomic) ILTMasterViewController *papa;
 

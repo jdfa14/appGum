@@ -13,6 +13,9 @@
 
 @property(nonatomic) UITableViewCellAccessoryType accessoryType;
 @property (strong, nonatomic) NSMutableArray *definicion;
+@property (nonatomic) NSInteger btnSection;
+@property (nonatomic) NSInteger btnRow;
+
 
 
 

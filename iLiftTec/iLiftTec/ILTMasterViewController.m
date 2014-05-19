@@ -258,12 +258,8 @@
     cell.musculoLabel.text = object[@"ejercicio"];
     cell.seriesL.text = [NSString stringWithFormat:@"%@", object[@"series"]];
     cell.repeticionesL.text = [NSString stringWithFormat:@"%@", object[@"repeticiones"]];
-    
-    
+    cell.indexPath = indexPath;
     cell.buttonIsOn = [_avance[indexPath.section][indexPath.row][@"completado"] boolValue];
-  
-    cell.section = indexPath.section;
-    cell.row = indexPath.row;
     cell.papa = self;
     [cell setDelegado:self];
     [cell updateImage];
@@ -280,7 +276,7 @@
 }
 
 -(void) updateDia: (NSInteger) dia ejercicio: (NSInteger) ejercicio completado: (BOOL) completado {
-    _avance[dia][ejercicio][@"completado"] = [NSNumber numberWithBool:completado];
+    _avance[dia][ejercicio][@"avance"] = [NSNumber numberWithBool:completado];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
