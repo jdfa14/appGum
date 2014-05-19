@@ -18,6 +18,7 @@
     if (self) {
         // Initialization code
     }
+    NSLog(@"IVAN");
     return self;
 }
 
@@ -36,8 +37,14 @@
 - (IBAction)checkButton:(id)sender {
     
     self.buttonIsOn = !self.buttonIsOn;
-     
-    [[[_delegado definicion][_indexPath.section] objectForKey:@"ejercicios"][_indexPath.row] setValue:@"1" forKey:@"avance"];
+    NSString *valor;
+    if (self.buttonIsOn) {
+        valor = @"1";
+    }else{
+        valor = @"0";
+    }
+    
+    [[[_delegado definicion][_indexPath.section] objectForKey:@"ejercicios"][_indexPath.row] setValue:valor forKey:@"avance"];
     
     NSDictionary *nueva = [[NSDictionary alloc] initWithObjectsAndKeys:[_delegado definicion], @"dias", nil];
     
@@ -59,7 +66,7 @@
         NSString *url = @"http://localhost/~ivandiaz/servidor/actualizarRutina.php";
         ILTJsonManager *JsonManager = [[ILTJsonManager alloc] init];
         NSDictionary *jsonData1 = [JsonManager jsonHandler:url parametros:post];
-        NSLog(@"Ivanobitch");
+        
     }
     
 
