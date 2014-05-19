@@ -606,7 +606,7 @@ function crearEjercicio(idTabla,indice,musculo,ejercicio,series,repeticiones,ava
     td2.innerHTML = ejercicio;
     td3.innerHTML = series;
     td4.innerHTML = repeticiones;
-    td5.innerHTML = avance === true ? "SI" : "NO";
+    td5.innerHTML = avance === "1" ? "SI" : "NO";
     
     boton.type = "button";
     boton.value = "editar";
@@ -622,7 +622,6 @@ function crearEjercicio(idTabla,indice,musculo,ejercicio,series,repeticiones,ava
 
 function obtenerJson(idTabla){
     var tabla = document.getElementById(idTabla);
-    var txt = document.getElementById("test");
     
     var dias = '';
     var ejercicios = '';
@@ -669,7 +668,6 @@ function obtenerJson(idTabla){
     }
     dias += '{ "nombre" : "' + nombreEjercicio +'" , "ejercicios" : [ ' + ejercicios + '] }'; 
     var json = '{ "dias": [ ' + dias + '] }';   
-    document.getElementById("test").innerHTML = json;
     var idInstructor = document.getElementById("idInstructor").value;
     var idAlumno = document.getElementById("idAlumno").value;
     guardarJson(idAlumno,idInstructor,json);
