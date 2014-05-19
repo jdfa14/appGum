@@ -113,8 +113,8 @@ function crearActividad(idTabla,nombre){
     var tr = tabla.insertRow(celdaInicial);
     var trBotonAgregar = tabla.insertRow(celdaInicial + 1);
     var trEncabezados = tabla.insertRow(celdaInicial + 2);
-    var td = tr.insertCell();
-    var td2 = tr.insertCell();
+    var td = tr.insertCell(0);
+    var td2 = tr.insertCell(1);
     var tdBotonAgregar = document.createElement("td");
     var boton = document.createElement("input");
     var botonB = document.createElement("input");
@@ -213,13 +213,13 @@ function ejercicioEditable(idTabla,indice,musculo,ejercicio,series,repeticiones,
     var tabla = document.getElementById(idTabla);
     var trNuevo = tabla.insertRow(indice);
     
-    var td1 = trNuevo.insertCell();
-    var td2 = trNuevo.insertCell();
+    var td1 = trNuevo.insertCell(0);
+    var td2 = trNuevo.insertCell(1);
     td2.setAttribute("colspan",2);
-    var td3 = trNuevo.insertCell();
-    var td4 = trNuevo.insertCell();
-    var td5 = trNuevo.insertCell();
-    var td6 = trNuevo.insertCell();
+    var td3 = trNuevo.insertCell(2);
+    var td4 = trNuevo.insertCell(3);
+    var td5 = trNuevo.insertCell(4);
+    var td6 = trNuevo.insertCell(5);
     
     var input1 = document.createElement("input");
     var input2 = document.createElement("input");
@@ -593,12 +593,12 @@ function guardarEjercicio(celda,idTabla){
 function crearEjercicio(idTabla,indice,musculo,ejercicio,series,repeticiones,avance,oculto){
     var tabla = document.getElementById(idTabla);
     var trNuevo = tabla.insertRow(indice);
-    var td1 = trNuevo.insertCell();
-    var td2 = trNuevo.insertCell();
-    var td3 = trNuevo.insertCell();
-    var td4 = trNuevo.insertCell();
-    var td5 = trNuevo.insertCell();
-    var td6 = trNuevo.insertCell();
+    var td1 = trNuevo.insertCell(0);
+    var td2 = trNuevo.insertCell(1);
+    var td3 = trNuevo.insertCell(2);
+    var td4 = trNuevo.insertCell(3);
+    var td5 = trNuevo.insertCell(4);
+    var td6 = trNuevo.insertCell(5);
     
     var boton = document.createElement("input");
     

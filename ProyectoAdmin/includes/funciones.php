@@ -158,11 +158,9 @@ function actualizaJson($conexion,$json,$idAlumno,$idInstructor){
     $query = "UPDATE alumnoinstructor SET definicion ='".$json."' WHERE idAlumno='".$idAlumno."' and idInstructor='".$idInstructor."' and fechaFinal IS NULL;";
     $result =  mysqli_query($conexion,$query);
     if(!$result){
-        print('No se pudo actualizar el json. Query :' . $query);
-        print('Error :' . mysql_error());
-        return 0;
+        return '{ "success" : 0 }';
     }
-    return 1;
+    return '{ "success" : 1 }';
 }
 
 function eliminarAlumno($conexion,$idAlumno,$idInstructor){
